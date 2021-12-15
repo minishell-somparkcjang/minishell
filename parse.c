@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:25:12 by cjang             #+#    #+#             */
-/*   Updated: 2021/12/15 18:00:26 by cjang            ###   ########.fr       */
+/*   Updated: 2021/12/15 18:10:48 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,18 @@ static void	delete_env_key(t_all *all, char *key)
 	t_env	*tmp1;
 	t_env	*tmp2;
 
+	tmp1 = NULL;
 	tmp2 = all->env->head;
 	while (tmp2)
 	{
 		if (ft_strncmp(tmp2->key, key, ft_strlen_long(tmp2->key, key)) == 0)
 		{
-			tmp1->next = tmp2->next;
+			if (tmp1 == NULL)
+				all->env->head = tmp2->next;
+			else
+				tmp1->next = tmp2->next;
 			free(tmp2);
+			all->env->num_env--;
 			return ;
 		}
 		tmp1 = tmp2;
@@ -111,6 +116,8 @@ void	parse(char *str, t_all *all)
 
 	split_str = ft_split(str, ' ');
 	// 대문자도 체크해야함.
+	if (!split_str[0])
+		return ;
 	if (ft_strncmp(split_str[0], "echo", ft_strlen_long(split_str[0], "echo")) == 0)
 		ms_echo(split_str);
 	else if (ft_strncmp(split_str[0], "cd", ft_strlen_long(split_str[0], "cd")) == 0)
