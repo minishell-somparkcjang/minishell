@@ -6,7 +6,7 @@
 #    By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 13:33:25 by cjang             #+#    #+#              #
-#    Updated: 2021/12/03 13:41:13 by cjang            ###   ########.fr        #
+#    Updated: 2021/12/15 17:14:30 by cjang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ LIBFT_A = libft/libft.a
 
 SRCS_DIR = ./
 SRCS_FILE = main_tmp.c\
-			parse.c
+			parse.c\
+			init_env.c\
+
 
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILE))
 OBJS = $(SRCS:.c=.o)

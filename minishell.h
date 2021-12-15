@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:25:43 by cjang             #+#    #+#             */
-/*   Updated: 2021/12/03 13:43:07 by cjang            ###   ########.fr       */
+/*   Updated: 2021/12/15 16:57:59 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,31 @@
 # include "libft/libft.h"
 # include <readline/readline.h>
 # include <stdio.h>
+# include <stdlib.h>
 
-void	parse(char *str);
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+}t_env;
 
+typedef struct s_env_lst
+{
+	t_env			*head;
+	int				num_env;
+}t_env_lst;
+
+typedef struct s_all
+{
+	t_env_lst		*env;
+}t_all;
+
+void	print_env(t_all *all);
+void	set_env(char *key, char *value, t_all *all);
+int		get_equl_idx(char *env);
+char	*get_env_value(char *env, int len);
+char	*get_env_key(char *env);
+void	init_env(t_all *all, char **env);
+void	parse(char *str, t_all *all);
 #endif
