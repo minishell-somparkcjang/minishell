@@ -6,12 +6,13 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:25:12 by cjang             #+#    #+#             */
-/*   Updated: 2021/12/15 18:10:48 by cjang            ###   ########.fr       */
+/*   Updated: 2021/12/15 20:25:09 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// 문자열 두개 중 가장 긴 값의 문자열 길이를 반환
 static size_t	ft_strlen_long(const char *s1, const char *s2)
 {
 	size_t	i1;
@@ -29,6 +30,7 @@ static size_t	ft_strlen_long(const char *s1, const char *s2)
 		return (i2);
 }
 
+// t_env에서 key값을 찾아 value를 반환
 static char	*find_env_key(t_all *all, char *key)
 {
 	t_env	*tmp;
@@ -43,6 +45,7 @@ static char	*find_env_key(t_all *all, char *key)
 	return (NULL);
 }
 
+// t_env에서 key값을 찾아 t_env값 삭제
 static void	delete_env_key(t_all *all, char *key)
 {
 	t_env	*tmp1;
@@ -109,6 +112,26 @@ static void	ms_unset(char **split_str, t_all *all)
 	delete_env_key(all, split_str[1]);
 }
 
+static void	ms_exit(void)
+{
+	exit(0);
+}
+
+static void	ms_command_not_found(char **split_str)
+{
+	printf("minishell: %s: command not found\n", split_str[0]);
+}
+
+static void	free_split_str(char **split_str)
+{
+	int			i;
+
+	i = 0;
+	while (split_str[i])
+		free(split_str[i++]);
+	free(split_str);
+}
+
 void	parse(char *str, t_all *all)
 {
 	char	**split_str;
@@ -131,8 +154,10 @@ void	parse(char *str, t_all *all)
 	else if (ft_strncmp(split_str[0], "env", ft_strlen_long(split_str[0], "env")) == 0)
 		ms_env(all);
 	else if (ft_strncmp(split_str[0], "exit", ft_strlen_long(split_str[0], "exit")) == 0)
-		exit(0);
-	free(split_str);
+		ms_exit();
+	else
+		ms_command_not_found(split_str);
+	free_split_str(split_str);
 }
 	// argv로 들어오는게 아니라서 띄어쓰기, '' "" 각각에 대해 대응을 해야 함.
 	// 일단 split으로 나눠보기

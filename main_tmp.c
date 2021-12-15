@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:21:19 by cjang             #+#    #+#             */
-/*   Updated: 2021/12/15 17:28:17 by cjang            ###   ########.fr       */
+/*   Updated: 2021/12/15 19:49:52 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,21 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc ;
 	(void)argv ;
 	(void)envp ;
-
 	init_env(&all, envp);
-	int i = 0;
 	while (1)
 	{
 		str = readline("minishell-0.0$ ");
-		parse(str, &all);
+		if (str)
+		{
+			parse(str, &all);
+			add_history(str);
+			free(str);
+		}
+		else
+			break ;
 	}
 	return (0);
 }
 
-//gcc main_tmp.c parse.c -o minishell -lreadline
+// gcc main_tmp.c parse.c -o minishell -lreadline
+// 터미널 실행중 시그널을 받으면 어떻게 처리해야하는거지..?
