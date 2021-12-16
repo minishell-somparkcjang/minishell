@@ -6,11 +6,12 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:21:19 by cjang             #+#    #+#             */
-/*   Updated: 2021/12/15 19:49:52 by cjang            ###   ########.fr       */
+/*   Updated: 2021/12/16 15:58:28 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parse.h"
 
 int	main(int argc, char **argv, char **envp)
 {

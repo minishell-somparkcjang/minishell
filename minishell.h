@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:25:43 by cjang             #+#    #+#             */
-/*   Updated: 2021/12/15 16:57:59 by cjang            ###   ########.fr       */
+/*   Updated: 2021/12/16 16:11:41 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/libft.h"
 # include <readline/readline.h>
+// # include <readline/history.h>
 # include <stdio.h>
 # include <stdlib.h>
 
@@ -42,5 +43,4 @@ int		get_equl_idx(char *env);
 char	*get_env_value(char *env, int len);
 char	*get_env_key(char *env);
 void	init_env(t_all *all, char **env);
-void	parse(char *str, t_all *all);
 #endif

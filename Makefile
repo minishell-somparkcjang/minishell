@@ -6,12 +6,12 @@
 #    By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 13:33:25 by cjang             #+#    #+#              #
-#    Updated: 2021/12/15 17:14:30 by cjang            ###   ########.fr        #
+#    Updated: 2021/12/16 16:28:30 by cjang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = # -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 READLINE = -lreadline
 
 LIBFT = libft
@@ -33,7 +33,7 @@ $(LIBFT):
 	@make -C $(LIBFT)
 
 $(NAME_MINISHELL): $(LIBFT_A) $(OBJS)
-	$(CC) $(CFLAGS)  $(LIBFT_A) $(OBJS) -o $(NAME_MINISHELL) $(READLINE)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME_MINISHELL) $(READLINE)
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) -o $@ $<

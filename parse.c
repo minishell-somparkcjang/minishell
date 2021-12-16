@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:25:12 by cjang             #+#    #+#             */
-/*   Updated: 2021/12/15 20:25:09 by cjang            ###   ########.fr       */
+/*   Updated: 2021/12/16 16:08:31 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ static void	free_split_str(char **split_str)
 void	parse(char *str, t_all *all)
 {
 	char	**split_str;
-	int		check;
+	// int		check;
 
 	split_str = ft_split(str, ' ');
 	// 대문자도 체크해야함.
