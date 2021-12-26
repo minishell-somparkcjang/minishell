@@ -6,7 +6,7 @@
 #    By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 13:33:25 by cjang             #+#    #+#              #
-#    Updated: 2021/12/16 16:28:30 by cjang            ###   ########.fr        #
+#    Updated: 2021/12/26 17:23:51 by cjang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,11 @@ LIBFT = libft
 LIBFT_A = libft/libft.a
 
 SRCS_DIR = ./
-SRCS_FILE = main_tmp.c\
+SRCS_FILE = main.c\
 			parse.c\
 			init_env.c\
+			token_func.c\
+			tokenization.c\
 
 
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILE))
