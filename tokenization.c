@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 20:31:24 by cjang             #+#    #+#             */
-/*   Updated: 2021/12/26 17:23:35 by cjang            ###   ########.fr       */
+/*   Updated: 2021/12/27 18:12:38 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,26 @@
 /* readline으로 받아온 문자열을 bash 인자 기준에 맞게 쪼갬 */
 /* 쪼갠 인자들의 타입이 무엇인지 char형으로 체크(c ommand, p ip, r edirection) */
 
-/* redirection 부분 파싱 보완 필요 */
+static char	*token_str_return(char *s, int i_tmp, int *i)
+{
+	char	c;
+	char	*str;
+
+	c = s[*i];
+	s[*i] = '\0';
+	str = ft_strdup(&s[i_tmp]);
+	s[*i] = c;
+	return (str);
+}
+
 static char	*token_str(char *s, int *i)
 {
 	int		i_tmp;
 	int		quotes_flag;
-	char	*str;
+	int		redi_flag;
 
 	quotes_flag = 0;
+	redi_flag = 0;
 	i_tmp = *i;
 	/* 맨 앞 문자가 [|]인 경우 [|]만 파싱 하기 */
 	if (s[*i] == '|')
@@ -47,6 +59,19 @@ static char	*token_str(char *s, int *i)
 			quotes_flag = 0;
 		else if (s[*i] == '\"' && quotes_flag == 2)
 			quotes_flag = 0;
+		else if ((s[*i] == '<' || s[*i] == '>') && redi_flag == 0)
+		{
+			if (ft_is_pos_int(&s[i_tmp], *i - i_tmp, 0, 0x7FFFFFFF) == 0)
+				return (token_str_return(s, i_tmp, i));
+			else
+			{
+				if (s[*i] == s[*i + 1])
+					*i += 1;
+				redi_flag = 1;
+			}	
+		}
+		else if ((s[*i] == '<' || s[*i] == '>') && redi_flag == 1)
+			return (token_str_return(s, i_tmp, i));
 		*i += 1;
 	}
 	/* 가리키는 끝 문자가 [ ]인 경우 [ ]가 없을때까지 i값 증가 */
@@ -61,23 +86,19 @@ static char	*token_str(char *s, int *i)
 	/* 가리키는 끝 문자가 [|]인 경우 [|] 앞에서 끊어줌 */
 	/* hello|		-> hello만 파싱 */
 	else if (s[*i] == '|')
-	{
-		s[*i] = '\0';
-		str = ft_strdup(&s[i_tmp]);
-		s[*i] = '|';
-		return (str);
-	}
+		return (token_str_return(s, i_tmp, i));
 	/* 가리키는 끝 문자가 [\0]인 경우 그대로 dup */
 	else
 		return (ft_strdup(&s[i_tmp]));
+
 }
 
-static char	token_type(t_token *token_prev, t_token *token)
+static t_type	token_type(t_token *token_prev, t_token *token)
 {
 	int		i;
 	int		quotes_flag;
 	char	*s;
-	// char	c;
+	t_type	t;
 
 	(void)token_prev ;
 	i = 0;
@@ -97,9 +118,11 @@ static char	token_type(t_token *token_prev, t_token *token)
 		i++;
 	}
 	if (s[i] == '|')
-		return ('p');
-	else if (s[i] == '<' || s[i] == '>')
-		return ('r');
+		t = pip;
+	else if (s[i] == '<')
+		t = r_in;
+	else if (s[i] == '>')
+		t = r_out;
 	// else if (token_prev->type == 'r')
 	// {
 	// 	c = token_prev->str[ft_strlen(token_prev->str) - 1];
@@ -107,7 +130,8 @@ static char	token_type(t_token *token_prev, t_token *token)
 	// 	return ('r');
 	// }
 	else
-		return ('c');
+		t = com;
+	return (t);
 }
 
 t_token	*tokenization(char *s)
@@ -165,7 +189,7 @@ t_token	*tokenization(char *s)
 	token = token_head;
 	while (token != NULL)
 	{
-		printf("[%s]%c	", token->str, token->type);
+		printf("[%s]%d	", token->str, token->type);
 		token = token->next;
 	}
 	printf("\n");
