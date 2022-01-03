@@ -6,11 +6,11 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:25:12 by cjang             #+#    #+#             */
-/*   Updated: 2021/12/16 16:08:31 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/02 13:14:08 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parse.h"
 
 // 문자열 두개 중 가장 긴 값의 문자열 길이를 반환
 static size_t	ft_strlen_long(const char *s1, const char *s2)
@@ -161,3 +161,12 @@ void	parse(char *str, t_all *all)
 }
 	// argv로 들어오는게 아니라서 띄어쓰기, '' "" 각각에 대해 대응을 해야 함.
 	// 일단 split으로 나눠보기
+
+void	parse_main(char *s, t_all *all)
+{
+	t_token		*token_header;
+
+	(void) all;
+	token_header = tokenization(s);
+	// token_env(token_header);
+}

@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:21:19 by cjang             #+#    #+#             */
-/*   Updated: 2021/12/16 15:58:28 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/02 13:11:30 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv, char **envp)
 		str = readline("minishell-0.0$ ");
 		if (str)
 		{
-			parse(str, &all);
+			parse_main(str, &all);
 			add_history(str);
 			free(str);
 		}

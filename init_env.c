@@ -3,6 +3,7 @@
 void	print_env(t_all *all)
 {
 	t_env	*tmp;
+
 	tmp = all->env->head;
 	printf("env_num: %d\n", all->env->num_env);
 	while (tmp)
@@ -18,8 +19,8 @@ void	set_env(char *key, char *value, t_all *all)
 	t_env	*tmp;
 
 	env_node = malloc(sizeof(t_env));
-	//error처리
-	if(env_node == NULL)
+	// error처리
+	if (env_node == NULL)
 		return ;
 	env_node->key = key;
 	env_node->value = value;
@@ -48,7 +49,7 @@ int	get_equl_idx(char *env)
 	while (env[i])
 	{
 		if (env[i] == '=')
-			break;
+			break ;
 		i++;
 	}
 	return (i);
@@ -56,7 +57,7 @@ int	get_equl_idx(char *env)
 
 char	*get_env_value(char *env, int len)
 {
-	int	start;
+	int		start;
 	char	*ret;
 
 	start = get_equl_idx(env) + 1;
@@ -66,7 +67,7 @@ char	*get_env_value(char *env, int len)
 
 char	*get_env_key(char *env)
 {
-	int	len;
+	int		len;
 	char	*ret;
 
 	len = get_equl_idx(env);
@@ -76,10 +77,10 @@ char	*get_env_key(char *env)
 
 void	init_env(t_all *all, char **env)
 {
-	int	i;
-	int	len;
-	char *key;
-	char *value;
+	int		i;
+	int		len;
+	char	*key;
+	char	*value;
 
 	i = 0;
 	all->env = malloc(sizeof(t_env_lst));

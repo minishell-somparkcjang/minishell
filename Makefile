@@ -6,12 +6,12 @@
 #    By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 13:33:25 by cjang             #+#    #+#              #
-#    Updated: 2021/12/26 17:23:51 by cjang            ###   ########.fr        #
+#    Updated: 2022/01/02 13:13:54 by cjang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = # -Wall -Wextra -Werror
 READLINE = -lreadline
 
 LIBFT = libft
@@ -23,6 +23,8 @@ SRCS_FILE = main.c\
 			init_env.c\
 			token_func.c\
 			tokenization.c\
+			token_env.c\
+			utils.c\
 
 
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILE))

@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 14:57:17 by cjang             #+#    #+#             */
-/*   Updated: 2021/12/27 18:13:00 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/02 13:10:57 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_parse_all
 
 void		parse(char *str, t_all *all);
 t_token		*tokenization(char *s);
+void		token_env(t_token *token);
+void		parse_main(char *s, t_all *all);
 void		token_init(t_token *token);
 void		token_free(t_token *token_head);
 int			ft_is_pos_int(char *s, int s_len, unsigned int start, unsigned int end);

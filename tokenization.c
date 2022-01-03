@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 20:31:24 by cjang             #+#    #+#             */
-/*   Updated: 2021/12/27 18:12:38 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/02 13:39:43 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static char	*token_str(char *s, int *i)
 	}
 	/* [|] [ ] [\0] 이 나올 때 까지 진행 */
 	/* [" "] [' '] 안에 있는 [ ] [|] 는 만나도 계속 진행 */
+	/* [<] [>]는 while문 안에서 따로 처리 */
 	while (((s[*i] != '|' && s[*i] != ' ') || quotes_flag != 0) \
 	&& s[*i] != '\0')
 	{
@@ -61,7 +62,7 @@ static char	*token_str(char *s, int *i)
 			quotes_flag = 0;
 		else if ((s[*i] == '<' || s[*i] == '>') && redi_flag == 0)
 		{
-			if (ft_is_pos_int(&s[i_tmp], *i - i_tmp, 0, 0x7FFFFFFF) == 0)
+			if (*i != i_tmp && ft_is_pos_int(&s[i_tmp], *i - i_tmp, 0, 0x7FFFFFFF) == 0)
 				return (token_str_return(s, i_tmp, i));
 			else
 			{
@@ -100,7 +101,6 @@ static t_type	token_type(t_token *token_prev, t_token *token)
 	char	*s;
 	t_type	t;
 
-	(void)token_prev ;
 	i = 0;
 	quotes_flag = 0;
 	s =token->str;
@@ -123,12 +123,14 @@ static t_type	token_type(t_token *token_prev, t_token *token)
 		t = r_in;
 	else if (s[i] == '>')
 		t = r_out;
-	// else if (token_prev->type == 'r')
-	// {
-	// 	c = token_prev->str[ft_strlen(token_prev->str) - 1];
-	// 	/* 리다이렉션 예외처리 필요 */
-	// 	return ('r');
-	// }
+	else if (token_prev != NULL && ft_strlen(token_prev->str) > 0)
+	{
+		s = token_prev->str;
+		if (s[ft_strlen(s) - 1] == '<' || s[ft_strlen(s) == '>'])
+			t = r_file;
+		else
+			t = com;
+	}
 	else
 		t = com;
 	return (t);
@@ -186,6 +188,8 @@ t_token	*tokenization(char *s)
 		token_prev = token;
 		token = token->next;
 	}
+
+	/* ------------------------------------------- */
 	token = token_head;
 	while (token != NULL)
 	{
@@ -193,5 +197,7 @@ t_token	*tokenization(char *s)
 		token = token->next;
 	}
 	printf("\n");
+	/* ------------------------------------------- */
+	
 	return (token_head);
 }
