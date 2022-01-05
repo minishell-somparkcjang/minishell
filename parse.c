@@ -6,69 +6,11 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:25:12 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/02 13:14:08 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/05 18:00:19 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-// 문자열 두개 중 가장 긴 값의 문자열 길이를 반환
-static size_t	ft_strlen_long(const char *s1, const char *s2)
-{
-	size_t	i1;
-	size_t	i2;
-
-	i1 = 0;
-	i2 = 0;
-	while (s1[i1] != '\0')
-		i1++;
-	while (s2[i2] != '\0')
-		i2++;
-	if (i1 > i2)
-		return (i1);
-	else
-		return (i2);
-}
-
-// t_env에서 key값을 찾아 value를 반환
-static char	*find_env_key(t_all *all, char *key)
-{
-	t_env	*tmp;
-
-	tmp = all->env->head;
-	while (tmp)
-	{
-		if (ft_strncmp(tmp->key, key, ft_strlen_long(tmp->key, key)) == 0)
-			return (tmp->value);
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
-
-// t_env에서 key값을 찾아 t_env값 삭제
-static void	delete_env_key(t_all *all, char *key)
-{
-	t_env	*tmp1;
-	t_env	*tmp2;
-
-	tmp1 = NULL;
-	tmp2 = all->env->head;
-	while (tmp2)
-	{
-		if (ft_strncmp(tmp2->key, key, ft_strlen_long(tmp2->key, key)) == 0)
-		{
-			if (tmp1 == NULL)
-				all->env->head = tmp2->next;
-			else
-				tmp1->next = tmp2->next;
-			free(tmp2);
-			all->env->num_env--;
-			return ;
-		}
-		tmp1 = tmp2;
-		tmp2 = tmp2->next;
-	}
-}
 
 static void	ms_echo(char **split_str)
 {
@@ -166,7 +108,7 @@ void	parse_main(char *s, t_all *all)
 {
 	t_token		*token_header;
 
-	(void) all;
+	// 따옴표 짝에 대한 체크를 따로 할지, 아니면 구조체를 형성하는 과정에서 할지 고민요소
 	token_header = tokenization(s);
-	// token_env(token_header);
+	token_env(token_header, all);
 }
