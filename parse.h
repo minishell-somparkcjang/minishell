@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 14:57:17 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/05 13:36:47 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/07 18:33:15 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@
 /* token_type 정의 */
 typedef enum e_type
 {
-	com = 0,
+	nontype = 0,
+	com,
 	pip,
 	r_in,
 	r_out,
 	r_outapp,
 	r_here,
+	fd_in,
+	fd_out,
 	r_file
 }t_type;
 
@@ -38,10 +41,11 @@ typedef struct s_token
 /* 리다이렉션의 input_fd, 리다이렉션 타입, output_fd OR filename */
 typedef struct s_redirection
 {
-	int				*fd_left;
-	t_type			*type;
-	int				*fd_right;
-	char			*file_name;
+	int						*fd_left;
+	t_type					*type;
+	int						*fd_right;
+	char					*file_name;
+	struct s_redirection	*next;
 }t_redirection;
 
 /* 명령어와 인자들 */
@@ -66,12 +70,23 @@ typedef struct s_parse_all
 	t_parse			*head;
 }t_parse_all;
 
-void		parse(char *str, t_all *all);
-t_token		*tokenization(char *s);
-void		token_env(t_token *token, t_all *all);
+/* builtin */
+void		ms_builtin(char *str, t_all *all);
+
+/* parse */
 void		parse_main(char *s, t_all *all);
-void		token_init(t_token *token);
+
+/* tokenization */
+t_token		*tokenization(char *s);
+
+/* token_env */
+void		token_env(t_token *token, t_all *all);
+
+/* token_func */
+void		token_init(t_token *token, char *str, t_token *next);
 void		token_free(t_token *token_head);
-int			ft_is_pos_int(char *s, int s_len, unsigned int start, unsigned int end);
+t_token		*token_malloc_init(char *str, t_type type);
+void		token_insert(t_token *token, t_token *token_new);
+t_token		*token_head_insert(t_token *token_head, t_token *token_new);
 
 #endif

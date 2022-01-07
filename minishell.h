@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 13:25:43 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/05 13:42:55 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/07 14:45:05 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,14 @@ typedef struct s_all
 	t_env_lst		*env;
 }t_all;
 
-void	print_env(t_all *all);
-void	set_env(char *key, char *value, t_all *all);
-int		get_equl_idx(char *env);
-char	*get_env_value(char *env, int len);
-char	*get_env_key(char *env);
+/* init_env */
+void	init_env(t_all *all, char **env);
+
+/* env_func */
 char	*find_env_key(t_all *all, char *key);
 void	delete_env_key(t_all *all, char *key);
-void	init_env(t_all *all, char **env);
+
+/* utils */
+size_t	ft_strlen_long(const char *s1, const char *s2);
+int		ft_is_fd_range(char *s, int s_len);
 #endif
