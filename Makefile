@@ -6,7 +6,7 @@
 #    By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 13:33:25 by cjang             #+#    #+#              #
-#    Updated: 2022/01/06 13:34:18 by cjang            ###   ########.fr        #
+#    Updated: 2022/01/10 16:34:26 by cjang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS_FILE = main.c\
 			token_func.c\
 			tokenization.c\
 			token_env.c\
+			parse_assemble.c\
 			utils.c\
 			builtin.c\
 

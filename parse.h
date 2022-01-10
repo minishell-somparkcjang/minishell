@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 14:57:17 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/07 18:33:15 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/10 16:34:08 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ typedef struct s_token
 /* 리다이렉션의 input_fd, 리다이렉션 타입, output_fd OR filename */
 typedef struct s_redirection
 {
-	int						*fd_left;
-	t_type					*type;
-	int						*fd_right;
+	int						fd_left;
+	t_type					type;
+	int						fd_right;
 	char					*file_name;
 	struct s_redirection	*next;
 }t_redirection;
@@ -81,6 +81,9 @@ t_token		*tokenization(char *s);
 
 /* token_env */
 void		token_env(t_token *token, t_all *all);
+
+/* parse_assemble */
+t_parse		*parse_assemble(t_token *token_head);
 
 /* token_func */
 void		token_init(t_token *token, char *str, t_token *next);
