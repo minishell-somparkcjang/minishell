@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/12/03 13:33:25 by cjang             #+#    #+#              #
-#    Updated: 2022/01/10 16:34:26 by cjang            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 CC = gcc
 CFLAGS = # -Wall -Wextra -Werror
 READLINE = -lreadline
@@ -19,16 +7,20 @@ LIBFT_A = libft/libft.a
 
 SRCS_DIR = ./
 SRCS_FILE = main.c\
-			parse.c\
-			init_env.c\
-			env_func.c\
-			token_func.c\
-			tokenization.c\
-			token_env.c\
-			parse_assemble.c\
+			parse/token_func.c\
+			parse/token_env.c\
+			parse/parse_assemble.c\
+			parse/tokenization.c\
+			parse/parse.c\
+			parse/parse_func.c\
+			env/init_env.c\
+			env/env_func.c\
+			redirection/redirection.c\
 			utils.c\
-			builtin.c\
-
+			# builtin/builtin.c\
+			builtin/builtin_cd.c\
+			builtin/builtin_echo.c\
+			builtin/builtin_export.c\ 
 
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILE))
 OBJS = $(SRCS:.c=.o)

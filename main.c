@@ -1,34 +1,26 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 13:21:19 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/06 13:27:37 by cjang            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "./include/minishell.h"
+// #include <readline/history.h>
 
-#include "minishell.h"
-#include "parse.h"
-
-int	main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
 	t_all	all;
 	char	*str;
 
 	(void)argc ;
 	(void)argv ;
-	(void)envp ;
 	init_env(&all, envp);
+	// signal_handle();
 	while (1)
 	{
+		// argv[0]으로 받아서 minishell 실행파일 이름 그 자체가 들어가도 될듯
 		str = readline("minishell-0.0$ ");
 		if (str)
 		{
 			parse_main(str, &all);
+			//test
+			// ms_echo(all.parser->right->content);
 			add_history(str);
+			parse_free(all.parser);
 			free(str);
 		}
 		else
@@ -36,6 +28,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
-
-// gcc main_tmp.c parse.c -o minishell -lreadline
-// 터미널 실행중 시그널을 받으면 어떻게 처리해야하는거지..?
