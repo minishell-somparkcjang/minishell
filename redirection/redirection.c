@@ -1,7 +1,7 @@
 #include "../include/minishell.h"
 #include <fcntl.h>
 
-void	red_apply(t_redirection *red_head)
+int	red_apply(t_redirection *red_head)
 {
 	t_redirection	*red;
 	int			fd;
@@ -47,21 +47,22 @@ void	red_apply(t_redirection *red_head)
 		}
 		red = red->next;
 	}
+	return (fd);
 }
-// close()의 타이밍은?
+/* close()의 타이밍은? */
 
-/* 대략 이런느낌 */
-void	red_test(t_redirection *red_head)
-{
-	pid_t	pid;
-	
-	// while (parse != NULL)
-	pid = fork();
-	if (pid == 0)
-	{
-		red_apply(red_head);
-		// command 실행
-		exit(0);
-	}
-	// parse = parse->next;
-}
+// /* 대략 이런느낌 */
+// void	red_test(t_redirection *red_head)
+// {
+// 	pid_t	pid;
+
+// 	// while (parse != NULL)
+// 	pid = fork();
+// 	if (pid == 0)
+// 	{
+// 		red_apply(red_head);
+// 		// command 실행
+// 		exit(0);
+// 	}
+// 	// parse = parse->next;
+// }

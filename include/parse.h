@@ -72,4 +72,6 @@ t_token		*token_head_insert(t_token *token_head, t_token *token_new);
 /* parse_func */
 void		parse_free(t_parse *parse_head);
 
+/* redirection */
+int			red_apply(t_redirection *red_head);
 #endif

@@ -3,6 +3,7 @@
 
 # include "../libft/libft.h"
 # include "parse.h"
+# include "redirection.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdio.h>
