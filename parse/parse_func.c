@@ -8,7 +8,7 @@ void	parse_free(t_parse *parse_head)
 	t_redirection	*red_prev;
 	t_command		*com;
 	int				i;
-	
+
 	parse = parse_head;
 	while (parse != NULL)
 	{
@@ -33,6 +33,7 @@ void	parse_free(t_parse *parse_head)
 				i++;
 			}
 			free(com->content);
+			free(com);
 		}
 		parse_prev = parse;
 		parse = parse->next;

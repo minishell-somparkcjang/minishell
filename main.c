@@ -5,10 +5,6 @@ int main(int argc, char **argv, char **envp)
 {
 	t_all	all;
 	char	*str;
-	int		fd;
-	int		stdin;
-	int		stdout;
-	int		stderr;
 
 	(void)argc ;
 	(void)argv ;
@@ -22,15 +18,28 @@ int main(int argc, char **argv, char **envp)
 		{
 			add_history(str);
 			parse_main(str, &all);
-			//test
-			std_save(&stdin, &stdout, &stderr);
-			fd = red_apply(all.parser->left);
-			ms_echo(all.parser->right->content, &all);
 
-			parse_free(all.parser);
-			free(str);
-			std_restore(stdin, stdout, stderr);
-			close(fd);
+			/*********** test case (echo hi > test.txt 와 같은 경우) ***********/
+			if (all.parser != NULL)
+			{
+				int fd;
+				int stdin;
+				int stdout;
+				int stderr;
+				std_save(&stdin, &stdout, &stderr);
+				fd = red_apply(all.parser->left);
+				if (all.parser->right != NULL)
+					ms_echo(all.parser->right->content, &all);
+				parse_free(all.parser);
+				free(str);
+				std_restore(stdin, stdout, stderr);
+				close(fd);
+			}
+			/************************** test end ****************************/
+
+			// ms_echo(all.parser->right->content, &all);
+			// parse_free(all.parser);
+			// free(str);
 		}
 		else
 			break ;

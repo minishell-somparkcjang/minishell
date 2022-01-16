@@ -170,7 +170,6 @@ t_parse	*parse_assemble(t_token *token_head)
 			token = token->next;
 		}
 	}
-	token_free(token_head);
 	return (parse_head);
 }
 

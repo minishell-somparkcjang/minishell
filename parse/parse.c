@@ -92,6 +92,7 @@ void	parse_main(char *s, t_all *all)
 	parse_head = parse_assemble(token_head);
 	if (parse_head == NULL)
 		return ;
+	token_free(token_head);
 	print_parse(parse_head);
 	all->parser = parse_head;
 }
