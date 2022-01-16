@@ -172,11 +172,3 @@ t_parse	*parse_assemble(t_token *token_head)
 	}
 	return (parse_head);
 }
-
-/* memo */
-/* t_parse 개수만큼 fork() */
-/* 파이프 앞-뒤 output-input 연결 */
-/* 각각의 자식프로세스에 각각의 t_parse 대응시켜주기 */
-/* -- 자식 프로세스 -- */
-/* 리다이렉션 처리 -> open? dup2 이용*/
-/* 빌트인 명령 처리 -> 구현한 빌트인인지, 아닌지 확인해서 분기 만들어주기 */

@@ -26,11 +26,14 @@ int main(int argc, char **argv, char **envp)
 				int stdin;
 				int stdout;
 				int stderr;
+				int heredoc_count;
 				std_save(&stdin, &stdout, &stderr);
+				heredoc_count = heredoc_apply(all.parser);
 				fd = red_apply(all.parser->left);
 				if (all.parser->right != NULL)
 					ms_echo(all.parser->right->content, &all);
 				parse_free(all.parser);
+				heredoc_tmp_file_delete(heredoc_count);
 				free(str);
 				std_restore(stdin, stdout, stderr);
 				close(fd);

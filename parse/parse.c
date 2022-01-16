@@ -72,6 +72,7 @@ static void	print_parse(t_parse *parse)
 		parse = parse->next;
 	}
 }
+
 void	parse_main(char *s, t_all *all)
 {
 	t_token		*token_head;

@@ -54,4 +54,3 @@ void		parse_main(char *s, t_all *all);
 void		token_env(t_token *token, t_all *all);
 
 #endif
-

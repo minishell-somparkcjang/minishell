@@ -74,4 +74,5 @@ void		parse_free(t_parse *parse_head);
 
 /* redirection */
 int			red_apply(t_redirection *red_head);
+int			heredoc_apply(t_parse *parse_head);
 #endif
