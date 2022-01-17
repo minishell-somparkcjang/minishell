@@ -4,3 +4,4 @@ flowchart
 README.md
 *.o
 minishell
+*.a

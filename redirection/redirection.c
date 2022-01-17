@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:30:39 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/17 01:31:25 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/17 13:07:40 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	heredoc_tmp_file_delete(int tmp_count)
 		str = ft_itoa(i);
 		if (str == NULL)
 			return (1);
-		printf("%s\n", filename);
+		filename = ft_strjoin("tmp__heredoc__", str);
 		if (filename == NULL)
 			return (1);
 		free(str);
@@ -41,7 +41,7 @@ int	heredoc_tmp_file_delete(int tmp_count)
 	return (0);
 }
 
-/* 
+/*
 ** 리턴 값에 대해서도 정의를 내려야 할 듯
 **	0	정상종료
 **	1	해당 함수 실행 조건 부적합, 동적할당 실패
