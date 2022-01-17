@@ -1,28 +1,7 @@
 #ifndef PARSE_H
 # define PARSE_H
 
-/* token_type 정의 */
-typedef enum e_type
-{
-	nontype = 0,
-	com,
-	pip,
-	r_in,
-	r_out,
-	r_outapp,
-	r_here,
-	fd_in,
-	fd_out,
-	r_file
-}t_type;
-
-/* readline에서 읽은 문자열을 파싱한 결과 */
-typedef struct s_token
-{
-	char			*str;
-	t_type			type;
-	struct s_token	*next;
-}t_token;
+# include "token.h"
 
 /* 리다이렉션의 input_fd, 리다이렉션 타입, output_fd OR filename */
 typedef struct s_redirection
@@ -57,18 +36,8 @@ typedef struct s_parse_all
 	t_parse			*head;
 }t_parse_all;
 
-/* tokenization */
-t_token		*tokenization(char *s);
-
 /* parse_assemble */
 t_parse		*parse_assemble(t_token *token_head);
-
-/* token_func */
-void		token_init(t_token *token, char *str, t_token *next);
-void		token_free(t_token *token_head);
-t_token		*token_malloc_init(char *str, t_type type);
-void		token_insert(t_token *token, t_token *token_new);
-t_token		*token_head_insert(t_token *token_head, t_token *token_new);
 
 /* parse_func */
 void		parse_free(t_parse *parse_head);
@@ -76,4 +45,9 @@ void		parse_free(t_parse *parse_head);
 /* redirection */
 int			red_apply(t_redirection *red_head);
 int			heredoc_apply(t_parse *parse_head);
+
+/* pipe */
+int			pipe_fd_connect(t_parse *parse_prev, t_parse *parse);
+int			pipe_fd_close(t_parse *parse_prev, t_parse *parse);
+
 #endif
