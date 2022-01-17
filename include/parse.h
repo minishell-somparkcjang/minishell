@@ -47,6 +47,7 @@ typedef struct s_parse
 {
 	t_redirection	*left;
 	t_command		*right;
+	int				pipe_fd[2];
 	struct s_parse	*next;
 }t_parse;
 

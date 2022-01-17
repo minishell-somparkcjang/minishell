@@ -19,9 +19,9 @@ SRCS_FILE = main.c\
 			redirection/std_backup.c\
 			utils.c\
 			builtin/builtin_echo.c\
+			builtin/builtin_export.c\
 			# builtin/builtin.c\
 			# builtin/builtin_cd.c\
-			# builtin/builtin_export.c\
 
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILE))
 OBJS = $(SRCS:.c=.o)
