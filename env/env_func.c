@@ -73,3 +73,35 @@ void	set_env_value(t_all *all, char *key, char *newvalue)
 		tmp = tmp->next;
 	}
 }
+
+// env 연결리스트 -> "key=value" 2차원배열로 return
+char	**ret_env(t_all *all)
+{
+	char	**env;
+	int		i;
+	char	*tmp_key;
+	char	*tmp_value;
+	t_env	*tmp;
+
+	env = malloc(sizeof(char *) * all->env->num_env);
+	if (env == NULL)
+	{
+		//malloc실패
+	}
+	i = 0;
+	tmp = all->env->head;
+	while (tmp)
+	{
+		tmp_key = ft_strdup(tmp->key);
+		tmp_value = ft_strdup(tmp->value);
+		env[i] = ft_strjoin(tmp_key, "=");
+		free(tmp_key);
+		tmp_key = ft_strjoin(env[i], tmp_value);
+		free(env[i]);
+		free(tmp_value);
+		env[i++] = tmp_key;
+		tmp = tmp->next;
+	}
+	env[i] = NULL;
+	return (env);
+}

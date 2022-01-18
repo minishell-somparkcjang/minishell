@@ -23,7 +23,7 @@ t_token	*token_free(t_token *token_head)
 	return (NULL);
 }
 
-t_token	*token_malloc_init(char *str, t_type type, t_token *next)
+t_token	*token_malloc_init(char *str, t_type type)
 {
 	t_token		*token;
 
@@ -32,7 +32,7 @@ t_token	*token_malloc_init(char *str, t_type type, t_token *next)
 		return (NULL);
 	token->str = str;
 	token->type = type;
-	token->next = next;
+	token->next = NULL;
 	return (token);
 }
 

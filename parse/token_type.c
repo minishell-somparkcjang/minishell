@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 00:51:24 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/18 00:54:53 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/18 14:36:08 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_type	token_type(t_token *token_prev, t_token *token)
 	int		i;
 	int		quotes_flag;
 	char	*s;
-	t_type	t;
 
 	i = 0;
 	quotes_flag = 0;

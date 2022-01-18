@@ -1,9 +1,24 @@
 #include "../include/minishell.h"
 
+static char *set_home_dir(t_all *all, char *path)
+{
+	int	len;
+	char *home;
+
+	len = ft_strlen(path);
+	if (len == 1)
+		return (ft_strdup(find_env_key(all, "HOME")));
+	else
+	{
+		home = find_env_key(all, "HOME");
+		return (ft_strjoin(home, &path[1]));
+	}
+}
+
 static char	*find_newpath(char *path, t_all *all)
 {
 	if (*path == '~')
-		return (ft_strdup(find_env_key(all, "HOME")));
+		return (set_home_dir(all, path));
 	else
 		return (ft_strdup(path));
 }
@@ -36,6 +51,7 @@ void	ms_cd(char **content, t_all *all)
 		set_env_value(all, ft_strdup("PWD"), ft_strdup(newpath));
 		all->exit_code = 0;
 	}
+	// printf("test pwd >> %s <<<\n", getcwd(NULL,0));
 	free(newpath);
 	free(oldpath);
 	return ;

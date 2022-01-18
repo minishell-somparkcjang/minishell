@@ -6,32 +6,32 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:02:15 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/18 01:19:46 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/18 14:45:04 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	token_struct_func(t_token *token_head)
+static int	token_struct_func(t_token **token_head, t_token **token)
 {
-	t_token		*token;
 	t_token		*token_prev;
 
-	if (token_head == NULL)
+	if (*token_head == NULL)
 	{
-		token = token_malloc_init(NULL, nontype, NULL);
-		if (!token)
+		*token = token_malloc_init(NULL, nontype);
+		if (!*token)
 			return (1);
-		token_head = token;
+		*token_head = *token;
 	}
 	else
 	{
-		token_prev = token;
-		token = token_malloc_init(NULL, nontype, NULL);
-		if (!token)
+		token_prev = *token;
+		*token = token_malloc_init(NULL, nontype);
+		if (!*token)
 			return (1);
-		token_prev->next = token;
+		token_prev->next = *token;
 	}
+	return (0);
 }
 
 static void	token_type_func(t_token *token_head)
@@ -64,7 +64,7 @@ t_token	*tokenization(char *s)
 		i++;
 	while (i < s_len)
 	{
-		if (token_struct_func(token_head) == 1)
+		if (token_struct_func(&token_head, &token) == 1)
 			return (token_free(token_head));
 		token->str = token_str(s, &i);
 		if (token->str == NULL)

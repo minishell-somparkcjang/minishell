@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:01:11 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/18 01:07:24 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/18 14:41:23 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ int	token_redirection(t_token **token_head)
 	t_token		*token_new;
 	char		*str_tmp;
 	char		*str_split[3];
-	char		c;
 	int			i;
 	int			i_start;
 	int			i_check;
 
-	token_prev = NULL;
 	token = *token_head;
+	token_prev = NULL;
 	while (token != NULL)
 	{
 		i = 0;
@@ -66,7 +65,7 @@ int	token_redirection(t_token **token_head)
 			// fd_in
 			if (str_split[0] != NULL)
 			{
-				token_new = token_malloc_init(str_split[0], fd_in, NULL);
+				token_new = token_malloc_init(str_split[0], fd_in);
 				if (token_new == NULL)
 					exit(1);
 				if (token_prev == NULL)
@@ -90,9 +89,9 @@ int	token_redirection(t_token **token_head)
 					str_split[2] = str_tmp;
 					i_check = ft_is_fd_range(str_split[2], ft_strlen(str_split[2]));
 					if (i_check == -2)
-						token_new = token_malloc_init(str_split[2], r_file, NULL);
+						token_new = token_malloc_init(str_split[2], r_file);
 					else if (0 <= i_check && i_check <= 10)
-						token_new = token_malloc_init(str_split[2], fd_out, NULL);
+						token_new = token_malloc_init(str_split[2], fd_out);
 					else
 					{
 						printf("bash: %d: Bad file descriptor\n", i_check);
@@ -100,7 +99,7 @@ int	token_redirection(t_token **token_head)
 					}
 				}
 				else
-					token_new = token_malloc_init(str_split[2], r_file, NULL);
+					token_new = token_malloc_init(str_split[2], r_file);
 				if (token_new == NULL)
 					exit(1);
 				token_insert(token, token_new);

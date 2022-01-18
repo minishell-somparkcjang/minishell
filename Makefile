@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = # -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra # -Werror
 READLINE = -lreadline
 
 LIBFT = libft
@@ -9,6 +9,9 @@ SRCS_DIR = ./
 SRCS_FILE = main.c\
 			parse/token_func.c\
 			parse/token_env.c\
+			parse/token_str.c\
+			parse/token_type.c\
+			parse/token_redirection.c\
 			parse/parse_assemble.c\
 			parse/tokenization.c\
 			parse/parse.c\
@@ -17,11 +20,17 @@ SRCS_FILE = main.c\
 			env/env_func.c\
 			redirection/redirection.c\
 			redirection/std_backup.c\
-			utils.c\
+			pipe/pipe.c\
+			builtin/builtin.c\
+			builtin/builtin_cd.c\
 			builtin/builtin_echo.c\
 			builtin/builtin_export.c\
-			# builtin/builtin.c\
-			# builtin/builtin_cd.c\
+			builtin/builtin_unset.c\
+			builtin/builtin_exit.c\
+			execution/start_ms.c\
+			execution/exec_cmd.c\
+			utils.c\
+
 
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILE))
 OBJS = $(SRCS:.c=.o)

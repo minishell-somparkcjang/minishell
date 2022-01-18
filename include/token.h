@@ -25,11 +25,12 @@ typedef struct s_token
 
 /* tokenization */
 t_token		*tokenization(char *s);
+char		*token_str_return(char *s, int i_start, int i_end);
 
 /* token_func */
 void		token_init(t_token *token, char *str, t_token *next);
 t_token		*token_free(t_token *token_head);
-t_token		*token_malloc_init(char *str, t_type type, t_token *next);
+t_token		*token_malloc_init(char *str, t_type type);
 void		token_insert(t_token *token, t_token *token_new);
 t_token		*token_head_insert(t_token *token_head, t_token *token_new);
 

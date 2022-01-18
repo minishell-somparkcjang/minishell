@@ -6,14 +6,14 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 00:57:37 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/18 01:53:36 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/18 14:25:15 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 /* token_str용 함수 */
-static char	*token_str_return(char *s, int i_start, int i_end)
+char	*token_str_return(char *s, int i_start, int i_end)
 {
 	char	c;
 	char	*str;
@@ -49,7 +49,7 @@ static int	redirection_check(char *s, int *i, int *r_flag, int i_tmp)
 			*i += 1;
 		*r_flag = 1;
 		return (0);
-	}	
+	}
 }
 
 static char	*next_str(char *s, int *i, int i_tmp)

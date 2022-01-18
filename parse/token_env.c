@@ -16,7 +16,8 @@ char	*env_get(char *str, int *i, t_all *all)
 	if (str[index] == '?')
 	{
 		*i += ++index;
-		return (ft_strdup("0"));
+		str_return = ft_itoa(all->exit_code);
+		return (ft_strdup(str_return));
 	}
 	// 숫자가 맨앞에 들어온 경우는 해당하는 숫자 하나만 환경변수 인자로 가짐.
 	else if (str[index] >= '0' && str[index] <= '9')

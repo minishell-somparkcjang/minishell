@@ -1,18 +1,18 @@
 #include "../include/minishell.h"
 
 /* 구조체화 된 환경변수 출력 */
-static void	print_env(t_all *all)
-{
-	t_env	*tmp;
+// static void	print_env(t_all *all)
+// {
+// 	t_env	*tmp;
 
-	tmp = all->env->head;
-	printf("env_num: %d\n", all->env->num_env);
-	while (tmp)
-	{
-		printf("key:%s, value:%s\n", tmp->key, tmp->value);
-		tmp = tmp->next;
-	}
-}
+// 	tmp = all->env->head;
+// 	printf("env_num: %d\n", all->env->num_env);
+// 	while (tmp)
+// 	{
+// 		printf("key:%s, value:%s\n", tmp->key, tmp->value);
+// 		tmp = tmp->next;
+// 	}
+// }
 
 /* 환경변수 linked list로 세팅 */
 static void	set_env(char *key, char *value, t_all *all)

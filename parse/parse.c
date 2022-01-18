@@ -22,6 +22,8 @@ static char	*type_check(t_type type)
 		str = "fd_out";
 	else if (type == r_file)
 		str = "r_file";
+	else
+		str = "nontype";
 	return (str);
 }
 
