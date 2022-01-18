@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:30:39 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/17 13:07:40 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/18 16:34:11 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,8 @@ int	red_apply(t_redirection *red_head)
 		// 실패시 예외처리, return (-1)
 		if (fd < 0)
 		{
-			printf("open_fail\n");
-			exit(1);
+			ft_putendl_fd("open fail", 2);
+			return (1);
 		}
 		// dup2를 이용하여 fd 수정
 		if (red->type == r_in || red->type == r_here || \
@@ -155,11 +155,11 @@ int	red_apply(t_redirection *red_head)
 		// 실패시 예외처리, return (-1)
 		if (i_check == -1)
 		{
-			printf("dup2 fail\n");
-			exit(1);
+			ft_putendl_fd("dup2 fail", 2);
+			return (1);
 		}
 		close(fd);
 		red = red->next;
 	}
-	return (fd);
+	return (0);
 }

@@ -26,7 +26,7 @@ typedef struct s_all
 {
 	t_env_lst		*env;
 	t_parse			*parser;
-	int				exit_code;
+	int				pip_cnt;
 }t_all;
 
 /* init_env */
@@ -54,6 +54,9 @@ int			is_builtin(t_command *str, t_all *all);
 
 /* parse */
 void		parse_main(char *s, t_all *all);
+
+/* parse_assemble */
+t_parse		*parse_assemble(t_token *token_head, t_all *all);
 
 /* token_env */
 void		token_env(t_token *token, t_all *all);

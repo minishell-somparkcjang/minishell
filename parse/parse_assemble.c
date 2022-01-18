@@ -141,7 +141,7 @@ t_redirection	*red_linked_list(t_token *token)
 }
 
 /* 해석을 완료한 token을 구조체로 구조화 시키기 */
-t_parse	*parse_assemble(t_token *token_head)
+t_parse	*parse_assemble(t_token *token_head, t_all *all)
 {
 	t_parse			*parse_head;
 	t_parse			*parse;
@@ -170,5 +170,6 @@ t_parse	*parse_assemble(t_token *token_head)
 			token = token->next;
 		}
 	}
+	all->pip_cnt = parse_size(parse_head);
 	return (parse_head);
 }

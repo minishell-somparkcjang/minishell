@@ -36,11 +36,9 @@ typedef struct s_parse_all
 	t_parse			*head;
 }t_parse_all;
 
-/* parse_assemble */
-t_parse		*parse_assemble(t_token *token_head);
-
 /* parse_func */
 void		parse_free(t_parse *parse_head);
+int			parse_size(t_parse *parse_head);
 
 /* redirection */
 int			red_apply(t_redirection *red_head);

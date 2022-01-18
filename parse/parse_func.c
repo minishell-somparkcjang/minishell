@@ -41,3 +41,18 @@ void	parse_free(t_parse *parse_head)
 	}
 	parse_head = NULL;
 }
+
+int	parse_size(t_parse *parse_head)
+{
+	int		len;
+	t_parse	*parse;
+
+	len = 0;
+	parse = parse_head;
+	while (parse)
+	{
+		len++;
+		parse = parse->next;
+	}
+	return (len);
+}

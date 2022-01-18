@@ -92,7 +92,7 @@ void	parse_main(char *s, t_all *all)
 		return ;
 	print_token(token_head);
 	/* token -> parse 구조체 */
-	parse_head = parse_assemble(token_head);
+	parse_head = parse_assemble(token_head, all);
 	if (parse_head == NULL)
 		return ;
 	token_free(token_head);
