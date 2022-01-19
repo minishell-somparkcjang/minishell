@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 00:51:24 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/18 14:36:08 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/19 17:54:19 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,8 @@ t_type	token_type(t_token *token_prev, t_token *token)
 	while (((s[i] != '|' && s[i] != '<' && s[i] != '>') || quotes_flag != 0) \
 	&& s[i] != '\0')
 	{
-		if (s[i] == '\'' && quotes_flag == 0)
-			quotes_flag = 1;
-		else if (s[i] == '\"' && quotes_flag == 0)
-			quotes_flag = 2;
-		else if (s[i] == '\'' && quotes_flag == 1)
-			quotes_flag = 0;
-		else if (s[i] == '\"' && quotes_flag == 2)
-			quotes_flag = 0;
+		quotes_flag = quotes_flag_check(s[i], quotes_flag);
 		i++;
 	}
-	return (type_check(s, token_prev));
+	return (type_check(&s[i], token_prev));
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/19 18:03:29 by cjang             #+#    #+#             */
+/*   Updated: 2022/01/19 18:03:29 by cjang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 static char	*type_check(t_type type)
@@ -75,27 +87,26 @@ static void	print_parse(t_parse *parse)
 	}
 }
 
+/*
+** 따옴표 짝에 대한 체크를 따로 할지, 아니면 구조체를 형성하는 과정에서 할지 고민요소
+** all->parser = parse_head; -> 이부분 안되있을시 free에서 오류남 -> 체크사항
+*/
 void	parse_main(char *s, t_all *all)
 {
 	t_token		*token_head;
 	t_parse		*parse_head;
 
-	// 따옴표 짝에 대한 체크를 따로 할지, 아니면 구조체를 형성하는 과정에서 할지 고민요소
-	/* readline str -> token */
-	/* all->parser = parse_head; -> 이부분 안되있을시 free에서 오류남 -> 체크사항 */
 	token_head = tokenization(s);
 	if (token_head == NULL)
 		return ;
-	/* token 안의, "", '', $ 변환 */
 	token_env(token_head, all);
 	if (token_head == NULL)
 		return ;
-	print_token(token_head);
-	/* token -> parse 구조체 */
+	// print_token(token_head);
 	parse_head = parse_assemble(token_head, all);
 	if (parse_head == NULL)
 		return ;
 	token_free(token_head);
-	print_parse(parse_head);
+	// print_parse(parse_head);
 	all->parser = parse_head;
 }

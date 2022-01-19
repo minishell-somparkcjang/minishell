@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-/* 구조체화 된 환경변수 출력 */
+// /* 구조체화 된 환경변수 출력 */
 // static void	print_env(t_all *all)
 // {
 // 	t_env	*tmp;
@@ -103,7 +103,7 @@ void	init_env(t_all *all, char **env)
 		set_env(key, value, all);
 		i++;
 	}
-	all->exit_code = 0;
+	all->pip_cnt = 0;
 	all->parser = NULL;
 	// print_env(all);
 }

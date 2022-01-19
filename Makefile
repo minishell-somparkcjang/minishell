@@ -16,9 +16,11 @@ SRCS_FILE = main.c\
 			parse/tokenization.c\
 			parse/parse.c\
 			parse/parse_func.c\
+			parse//utils.c\
 			env/init_env.c\
 			env/env_func.c\
 			redirection/redirection.c\
+			redirection/heredoc.c\
 			redirection/std_backup.c\
 			pipe/pipe.c\
 			builtin/builtin.c\
@@ -29,7 +31,9 @@ SRCS_FILE = main.c\
 			builtin/builtin_exit.c\
 			execution/start_ms.c\
 			execution/exec_cmd.c\
+			error_handler/error_handler.c\
 			utils.c\
+			signal.c\
 
 
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILE))

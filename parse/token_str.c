@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 00:57:37 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/18 14:25:15 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/19 17:53:09 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*token_str_return(char *s, int i_start, int i_end)
 
 	c = s[i_end];
 	s[i_end] = '\0';
-	str = ft_strdup(&s[i_start]);
+	str = ft_strdup_error_check(&s[i_start]);
 	s[i_end] = c;
 	return (str);
 }
@@ -28,21 +28,22 @@ char	*token_str_return(char *s, int i_start, int i_end)
 static int	redirection_check(char *s, int *i, int *r_flag, int i_tmp)
 {
 	int		i_check;
+	char	*i_to_a;
 
 	i_check = ft_is_fd_range(&s[i_tmp], *i - i_tmp);
 	if (*i != i_tmp && i_check == -2)
 		return (2);
-	// 에러처리 (보완필요)
 	else if (*i != i_tmp && 256 <= i_check && i_check <= 0x7FFFFFFF)
 	{
-		printf("bash: %d: Bad file descriptor\n", i_check);
+		i_to_a = ft_itoa(i_check);
+		error_print3(NULL, i_to_a, ": Bad file descriptor", 1);
+		if (i_to_a != NULL)
+			free(i_to_a);
 		return (1);
 	}
 	else if (*i != i_tmp && i_check == -1)
-	{
-		ft_putendl_fd("bash: file descriptor out of range: Bad file descriptor", 2);
-		return (1);
-	}
+		return (error_print("file descriptor out of range: \
+		Bad file descriptor", 1));
 	else
 	{
 		if (s[*i] == s[*i + 1])
@@ -59,7 +60,7 @@ static char	*next_str(char *s, int *i, int i_tmp)
 	if (s[*i] == ' ')
 	{
 		s[*i] = '\0';
-		str = ft_strdup(&s[i_tmp]);
+		str = ft_strdup_error_check(&s[i_tmp]);
 		s[*i] = ' ';
 		*i += 1;
 		while (s[*i] == ' ')
@@ -76,7 +77,7 @@ static char	*next_str(char *s, int *i, int i_tmp)
 	else if (s[*i] == '|' && i_tmp != *i)
 		return (token_str_return(s, i_tmp, *i));
 	else
-		return (ft_strdup(&s[i_tmp]));
+		return (ft_strdup_error_check(&s[i_tmp]));
 }
 
 char	*token_str(char *s, int *i)
@@ -91,14 +92,8 @@ char	*token_str(char *s, int *i)
 	i_tmp = *i;
 	while (((s[*i] != '|' && s[*i] != ' ') || quo_flag != 0) && s[*i] != '\0')
 	{
-		if (s[*i] == '\'' && quo_flag == 0)
-			quo_flag = 1;
-		else if (s[*i] == '\"' && quo_flag == 0)
-			quo_flag = 2;
-		else if (s[*i] == '\'' && quo_flag == 1)
-			quo_flag = 0;
-		else if (s[*i] == '\"' && quo_flag == 2)
-			quo_flag = 0;
+		if (s[*i] == '\'' || s[*i] == '\"')
+			quo_flag = quotes_flag_check(s[*i], quo_flag);
 		else if ((s[*i] == '<' || s[*i] == '>') && r_flag == 0 && quo_flag == 0)
 		{
 			i_check = redirection_check(s, i, &r_flag, i_tmp);

@@ -6,11 +6,26 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:02:15 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/18 14:45:04 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/19 17:54:05 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+static void	token_type_func(t_token *token_head)
+{
+	t_token		*token;
+	t_token		*token_prev;
+
+	token = token_head;
+	token_prev = NULL;
+	while (token != NULL)
+	{
+		token->type = token_type(token_prev, token);
+		token_prev = token;
+		token = token->next;
+	}
+}
 
 static int	token_struct_func(t_token **token_head, t_token **token)
 {
@@ -32,21 +47,6 @@ static int	token_struct_func(t_token **token_head, t_token **token)
 		token_prev->next = *token;
 	}
 	return (0);
-}
-
-static void	token_type_func(t_token *token_head)
-{
-	t_token		*token;
-	t_token		*token_prev;
-
-	token = token_head;
-	token_prev = NULL;
-	while (token != NULL)
-	{
-		token->type = token_type(token_prev, token);
-		token_prev = token;
-		token = token->next;
-	}
 }
 
 t_token	*tokenization(char *s)

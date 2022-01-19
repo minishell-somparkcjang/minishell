@@ -37,19 +37,19 @@ void	ms_cd(char **content, t_all *all)
 	{
 		free(newpath);
 		free(oldpath);
-		all->exit_code = 1;
+		g_exit_code = 1;
 		return ;
 	}
 	if (chdir(newpath) == -1)
 	{
 		printf("cd: no such file or directory: %s", newpath);
-		all->exit_code = 1;
+		g_exit_code = 1;
 	}
 	else
 	{
 		set_env_value(all, ft_strdup("OLDPATH"), ft_strdup(oldpath));
 		set_env_value(all, ft_strdup("PWD"), ft_strdup(newpath));
-		all->exit_code = 0;
+		g_exit_code = 0;
 	}
 	// printf("test pwd >> %s <<<\n", getcwd(NULL,0));
 	free(newpath);

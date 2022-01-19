@@ -47,7 +47,38 @@ void	exec_cmd(t_command *command, t_all *all, char **envp)
 {
 	char	*path;
 
+	printf("test3-cmd: %s, ct: %s\n", command->command, command->content[1]);
 	path = get_path(command, all);
 	execve(path, command->content, envp);
 	//error처리
+}
+
+void	set_exit(int status)
+{
+	if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGINT)
+			g_exit_code = 130;
+		else if (WTERMSIG(status) == SIGQUIT)
+			g_exit_code = 131;
+	}
+	else
+		g_exit_code = WEXITSTATUS(status);
+}
+
+void	exec_single_cmd(t_command *command, t_all *all, char **envp)
+{
+	pid_t	pid;
+	int		status;
+
+	pid = fork();
+	if (pid < 0)
+		printf("Failed forking child..\n");
+	else if (pid == 0)
+		exec_cmd(command, all, envp);
+	else
+	{
+		waitpid(pid, &status, 0);
+		set_exit(status);
+	}
 }

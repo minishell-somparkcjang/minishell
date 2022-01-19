@@ -43,4 +43,7 @@ t_type		token_type(t_token *token_prev, t_token *token);
 /* token_redirection */
 int			token_redirection(t_token **token_head);
 
+/* utils */
+char		*ft_strdup_error_check(char *str);
+int			quotes_flag_check(char c, int quotes_flag);
 #endif

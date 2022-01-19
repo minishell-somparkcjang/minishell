@@ -65,3 +65,38 @@ size_t	ft_strlen_long(const char *s1, const char *s2)
 	else
 		return (i2);
 }
+
+t_parse	*ret_parse_prev(t_all *all, t_parse *parse)
+{
+	t_parse *tmp;
+
+	tmp = all->parser;
+	if (tmp == parse)
+		return (NULL);
+	while (tmp)
+	{
+		if (tmp->next == parse)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+int	ft_isspace(char *str)
+{
+	int	i;
+	int	nb;
+
+	i = -1;
+	nb = 0;
+	while (++i < ft_strlen(str))
+	{
+		if (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+			|| str[i] == '\f' || str[i] == '\r'
+			|| str[i] == ' ')
+			nb++;
+	}
+	if (nb == ft_strlen(str))
+		return (1);
+	return (0);
+}

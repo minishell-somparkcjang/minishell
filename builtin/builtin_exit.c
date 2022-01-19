@@ -36,7 +36,7 @@ void	ms_exit(char **content, t_all *all)
 	}
 	else
 	{
-		all->exit_code = 1;
+		g_exit_code = 1;
 		printf("exit\nminishell: exit: too many arguments\n");
 		return ;
 	}

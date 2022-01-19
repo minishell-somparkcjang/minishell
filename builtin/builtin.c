@@ -9,7 +9,7 @@ static void	ms_pwd(t_all *all)
 	if (s != NULL)
 		printf("%s\n", s);
 	free(s);
-	all->exit_code = 0;
+	g_exit_code = 0;
 }
 
 /* env */
@@ -24,7 +24,7 @@ static void	ms_env(t_all *all)
 			printf("%s=%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
-	all->exit_code = 0;
+	g_exit_code = 0;
 }
 
 //str = parser->right
@@ -57,7 +57,6 @@ int is_builtin(t_command *str, t_all *all)
 	char *command;
 	char **content;
 
-	(void) all;
 	command = str->command;
 	content = str->content;
 	if (ft_strcmp(command, "echo") || ft_strcmp(command, "ECHO")

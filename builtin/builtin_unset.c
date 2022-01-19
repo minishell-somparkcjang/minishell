@@ -33,7 +33,7 @@ void	ms_unset(char **content, t_all *all)
 
 	if (content[1] == NULL)
 	{
-		all->exit_code = 0;
+		g_exit_code = 0;
 		return ;
 	}
 	i = 1;
@@ -43,12 +43,12 @@ void	ms_unset(char **content, t_all *all)
 		{
 			// printf("test unset: key >> %s <<", content[i]);
 			delete_env(all, content[i]);
-			all->exit_code = 0;
+			g_exit_code = 0;
 		}
 		else
 		{
 			printf("minishell: unset: `%s': not a valid identifier\n", content[i]);
-			all->exit_code = 1;
+			g_exit_code = 1;
 		}
 		i++;
 	}

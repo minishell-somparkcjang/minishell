@@ -8,7 +8,7 @@ char	*find_env_key(t_all *all, char *key)
 	tmp = all->env->head;
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->key, key, ft_strlen_long(tmp->key, key)) == 0)
+		if (ft_strcmp(tmp->key, key))
 			return (tmp->value);
 		tmp = tmp->next;
 	}
@@ -25,12 +25,14 @@ void	delete_env_key(t_all *all, char *key)
 	tmp2 = all->env->head;
 	while (tmp2)
 	{
-		if (ft_strncmp(tmp2->key, key, ft_strlen_long(tmp2->key, key)) == 0)
+		if (ft_strcmp(tmp2->key, key))
 		{
 			if (tmp1 == NULL)
 				all->env->head = tmp2->next;
 			else
 				tmp1->next = tmp2->next;
+			free(tmp2->key);
+			free(tmp2->value);
 			free(tmp2);
 			all->env->num_env--;
 			return ;
@@ -49,7 +51,7 @@ void	set_env_value(t_all *all, char *key, char *newvalue)
 	tmp = all->env->head;
 	while (tmp)
 	{
-		if (ft_strncmp(tmp->key, key, ft_strlen_long(tmp->key, key)) == 0)
+		if (ft_strcmp(tmp->key, key))
 		{
 			free(tmp->value);
 			free(key);

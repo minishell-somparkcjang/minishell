@@ -41,7 +41,7 @@ static void	set_env(char *content, t_all *all)
 		free(key);
 		free(value);
 	}
-	all->exit_code = 0;
+	g_exit_code = 0;
 }
 
 static void	print_export(t_all *all)
@@ -69,7 +69,7 @@ void	ms_export(char **content, t_all *all)
 	if (content[1] == NULL)
 	{
 		print_export(all);
-		all->exit_code = 0;
+		g_exit_code = 0;
 		return ;
 	}
 	i = 1;
@@ -78,12 +78,12 @@ void	ms_export(char **content, t_all *all)
 		if (ft_isalpha(content[i][0]) || content[i][0] == '_')
 		{
 			set_env(content[i], all);
-			all->exit_code = 0;
+			g_exit_code = 0;
 		}
 		else
 		{
 			printf("minishell: export: `%s': not a valid identifier\n", content[i]);
-			all->exit_code = 1;
+			g_exit_code = 1;
 		}
 		i++;
 	}

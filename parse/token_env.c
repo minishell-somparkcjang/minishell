@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token_env.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/19 18:03:10 by cjang             #+#    #+#             */
+/*   Updated: 2022/01/19 18:03:11 by cjang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 char	*env_get(char *str, int *i, t_all *all)
@@ -16,7 +28,7 @@ char	*env_get(char *str, int *i, t_all *all)
 	if (str[index] == '?')
 	{
 		*i += ++index;
-		str_return = ft_itoa(all->exit_code);
+		str_return = ft_itoa(g_exit_code);
 		return (ft_strdup(str_return));
 	}
 	// 숫자가 맨앞에 들어온 경우는 해당하는 숫자 하나만 환경변수 인자로 가짐.

@@ -27,7 +27,7 @@ void	ms_echo(char **content, t_all *all)
 	if (content[1] == NULL)
 	{
 		printf("\n");
-		all->exit_code = 0;
+		g_exit_code = 0;
 		return ;
 	}
 	nlflag = 0;
@@ -45,5 +45,5 @@ void	ms_echo(char **content, t_all *all)
 	}
 	if (!nlflag)
 		printf("\n");
-	all->exit_code = 0;
+	g_exit_code = 0;
 }

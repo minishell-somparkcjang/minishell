@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token_func.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/19 16:57:40 by cjang             #+#    #+#             */
+/*   Updated: 2022/01/19 16:57:40 by cjang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 void	token_init(t_token *token, char *str, t_token *next)
@@ -29,7 +41,10 @@ t_token	*token_malloc_init(char *str, t_type type)
 
 	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
+	{
+		error_print(strerror(errno), 1);
 		return (NULL);
+	}
 	token->str = str;
 	token->type = type;
 	token->next = NULL;
