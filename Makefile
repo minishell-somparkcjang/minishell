@@ -12,6 +12,7 @@ SRCS_FILE = main.c\
 			parse/token_str.c\
 			parse/token_type.c\
 			parse/token_redirection.c\
+			parse/token_redirection2.c\
 			parse/parse_assemble.c\
 			parse/tokenization.c\
 			parse/parse.c\

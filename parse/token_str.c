@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 00:57:37 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/19 17:53:09 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/19 23:34:02 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	redirection_check(char *s, int *i, int *r_flag, int i_tmp)
 	else if (*i != i_tmp && 256 <= i_check && i_check <= 0x7FFFFFFF)
 	{
 		i_to_a = ft_itoa(i_check);
-		error_print3(NULL, i_to_a, ": Bad file descriptor", 1);
+		error_print3("minishell: ", i_to_a, ": Bad file descriptor", 1);
 		if (i_to_a != NULL)
 			free(i_to_a);
 		return (1);

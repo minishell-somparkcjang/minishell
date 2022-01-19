@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/20 00:44:41 by cjang             #+#    #+#             */
+/*   Updated: 2022/01/20 00:44:58 by cjang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TOKEN_H
 # define TOKEN_H
 
@@ -24,26 +36,29 @@ typedef struct s_token
 }t_token;
 
 /* tokenization */
-t_token		*tokenization(char *s);
-char		*token_str_return(char *s, int i_start, int i_end);
+t_token	*tokenization(char *s);
+char	*token_str_return(char *s, int i_start, int i_end);
 
 /* token_func */
-void		token_init(t_token *token, char *str, t_token *next);
-t_token		*token_free(t_token *token_head);
-t_token		*token_malloc_init(char *str, t_type type);
-void		token_insert(t_token *token, t_token *token_new);
-t_token		*token_head_insert(t_token *token_head, t_token *token_new);
+void	token_init(t_token *token, char *str, t_token *next);
+t_token	*token_free(t_token *token_head);
+t_token	*token_malloc_init(char *str, t_type type);
+void	token_insert(t_token *token, t_token *token_new);
+t_token	*token_head_insert(t_token *token_head, t_token *token_new);
 
 /* token_str */
-char		*token_str(char *s, int *i);
+char	*token_str(char *s, int *i);
 
 /* token_type */
-t_type		token_type(t_token *token_prev, t_token *token);
+t_type	token_type(t_token *token_prev, t_token *token);
 
 /* token_redirection */
-int			token_redirection(t_token **token_head);
+int		token_redirection(t_token **token_head);
+
+/* token_redirection2 */
+int		token_redi_insert(t_token **t_h, t_token **t, t_token **t_p, char **s);
 
 /* utils */
-char		*ft_strdup_error_check(char *str);
-int			quotes_flag_check(char c, int quotes_flag);
+char	*ft_strdup_error_check(char *str);
+int		quotes_flag_check(char c, int quotes_flag);
 #endif
