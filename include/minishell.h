@@ -11,6 +11,7 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <sys/errno.h>
+# include <sys/stat.h>
 # include <signal.h>
 
 typedef struct s_env
@@ -50,24 +51,25 @@ int		ft_is_fd_range(char *s, int s_len);
 int		ft_strcmp(char *str1, char *str2);
 t_parse	*ret_parse_prev(t_all *all, t_parse *parse);
 int		ft_isspace(char *str);
+void	free_env(char **envp);
 
 /* builtin */
-void		exec_builtin(t_command *str, t_all *all);
-void		ms_cd(char **content, t_all *all);
-void		ms_echo(char **content, t_all *all);
-void		ms_export(char **content, t_all *all);
-void		ms_unset(char **content, t_all *all);
-void		ms_exit(char **content, t_all *all);
-int 		is_builtin(t_command *str, t_all *all);
+void	exec_builtin(t_command *str, t_all *all);
+void	ms_cd(char **content, t_all *all);
+void	ms_echo(char **content);
+void	ms_export(char **content, t_all *all);
+void	ms_unset(char **content, t_all *all);
+void	ms_exit(char **content);
+int		is_builtin(t_command *str);
 
 /* parse */
-void		parse_main(char *s, t_all *all);
+void	parse_main(char *s, t_all *all);
 
 /* parse_assemble */
-t_parse		*parse_assemble(t_token *token_head, t_all *all);
+t_parse	*parse_assemble(t_token *token_head, t_all *all);
 
 /* token_env */
-void		token_env(t_token *token, t_all *all);
+void	token_env(t_token *token, t_all *all);
 
 /* exec */
 void	start_ms(t_all *all);
@@ -76,11 +78,12 @@ void	exec_cmd(t_command *command, t_all *all, char **envp);
 void	set_exit(int status);
 
 /* signal */
-void	signal_handle(void);
+void	signal_handle(void);	
 
 /* error */
 int		error_print(char *str, int exit_code);
-void	error_exit(char *str, int exit_code);
 int		error_print3(char *str1, char *str2, char *str3, int exit_code);
+void	error_exit(char *str, int exit_code);
+void	error_handler(char *arg, int _errno);
 
 #endif

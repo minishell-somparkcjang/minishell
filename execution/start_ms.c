@@ -15,35 +15,35 @@ WSTOPSIG
 자식을 정지하도록 야기한 신호의 숫자를 반환
 */
 
-static int	exec_child(t_parse *parse, t_parse *parse_prev, t_all *all, pid_t pid)
+static int	exec_child(t_parse *parse, t_parse *parse_prev, t_all *all, pid_t pid, char **envp)
 {
 	pipe_fd_connect(parse_prev, parse);
 	if (red_apply(parse->left) == 1)
 		return (pid);
-	if (is_builtin(parse->right, all))
+	if (is_builtin(parse->right))
 		exec_builtin(parse->right, all);
 	else
-		exec_cmd(parse->right, all, ret_env(all));
+		exec_cmd(parse->right, all, envp);
 	exit(g_exit_code);
 	return (0);
 }
 
-static pid_t	make_child(t_all *all, t_parse *parse, int heredoc_count)
+static pid_t	make_child(t_all *all, t_parse *parse, int heredoc_count, char **envp)
 {
 	pid_t	pid;
 	int		ret;
 	t_parse	*parse_prev;
-	int	i = 1;
-
-	pipe(parse->pipe_fd);
+	
+	if (parse->next != NULL)
+		pipe(parse->pipe_fd);
 	parse_prev = ret_parse_prev(all, parse);
 	pid = fork();
 	if (pid < 0)
 		printf("Failed forking child..\n");
 	else if (pid == 0)
 	{
-		ret = exec_child(parse, parse_prev, all, pid);
-		if (ret != 0)
+		ret = exec_child(parse, parse_prev, all, pid, envp);
+		if(ret != 0)
 			return (ret);
 	}
 	pipe_fd_close(parse_prev, parse);
@@ -56,13 +56,14 @@ static void	multi_cmd(t_all *all, int heredoc_count)
 	t_parse	*tmp_parse;
 	int		i;
 	int		status;
+	char	**envp;
 
 	i = 0;
+	envp = ret_env(all);
 	tmp_parse = all->parser;
 	while (tmp_parse)
 	{
-		pid[i] = make_child(all, tmp_parse, heredoc_count);
-		i++;
+		pid[i++] = make_child(all, tmp_parse, heredoc_count, envp);
 		tmp_parse = tmp_parse->next;
 	}
 	i = 0;
@@ -71,25 +72,26 @@ static void	multi_cmd(t_all *all, int heredoc_count)
 		waitpid(pid[i++], &status, 0);
 		set_exit(status);
 	}
+	free_env(envp);
 }
+
 static void	single_cmd(t_all *all, int heredoc_count)
 {
-	int fd;
-	int stdin;
-	int stdout;
-	int stderr;
+	int 	stdin;
+	int 	stdout;
+	int 	stderr;
+	char	**envp;
 
 	std_save(&stdin, &stdout, &stderr);
+	envp = ret_env(all);
 	if (red_apply(all->parser->left) == 1)
-	{
-		std_restore(stdin, stdout, stderr);
 		return ;
-	}
-	if (is_builtin(all->parser->right, all))
+	if (is_builtin(all->parser->right))
 		exec_builtin(all->parser->right, all);
 	else
-		exec_single_cmd(all->parser->right, all, ret_env(all));
+		exec_single_cmd(all->parser->right, all, envp);
 	std_restore(stdin, stdout, stderr);
+	free_env(envp);
 }
 
 void	start_ms(t_all *all)
@@ -97,7 +99,7 @@ void	start_ms(t_all *all)
 	int heredoc_count;
 
 	heredoc_count = heredoc_apply(all->parser);
-	if (heredoc_count == -1)
+	if (heredoc_count < 0)
 		return ;
 	if (all->pip_cnt == 1)
 		single_cmd(all, heredoc_count);

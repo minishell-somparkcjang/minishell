@@ -42,8 +42,9 @@ void	ms_cd(char **content, t_all *all)
 	}
 	if (chdir(newpath) == -1)
 	{
-		printf("cd: no such file or directory: %s", newpath);
-		g_exit_code = 1;
+		error_print("cd: no such file or directory: ", 1);
+		error_print(newpath, 1);
+		error_print("\n", 1);
 	}
 	else
 	{
@@ -51,7 +52,6 @@ void	ms_cd(char **content, t_all *all)
 		set_env_value(all, ft_strdup("PWD"), ft_strdup(newpath));
 		g_exit_code = 0;
 	}
-	// printf("test pwd >> %s <<<\n", getcwd(NULL,0));
 	free(newpath);
 	free(oldpath);
 	return ;

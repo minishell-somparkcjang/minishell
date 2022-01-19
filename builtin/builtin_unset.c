@@ -11,7 +11,6 @@ static void	delete_env(t_all *all, char *key)
 	{
 		if (ft_strncmp(tmp2->key, key, ft_strlen_long(tmp2->key, key)) == 0)
 		{
-			// printf("delete key: %s, value %s\n", tmp2->key, tmp2->value);
 			if (tmp1 == NULL)
 				all->env->head = tmp2->next;
 			else
@@ -41,14 +40,14 @@ void	ms_unset(char **content, t_all *all)
 	{
 		if (ft_isalpha(content[i][0]) || content[i][0] == '_')
 		{
-			// printf("test unset: key >> %s <<", content[i]);
 			delete_env(all, content[i]);
 			g_exit_code = 0;
 		}
 		else
 		{
-			printf("minishell: unset: `%s': not a valid identifier\n", content[i]);
-			g_exit_code = 1;
+			error_print("minishell: unset: `", 1);
+			error_print(content[i], 1);
+			error_print("': not a valid identifier\n", 1);
 		}
 		i++;
 	}

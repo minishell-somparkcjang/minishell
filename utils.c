@@ -100,3 +100,13 @@ int	ft_isspace(char *str)
 		return (1);
 	return (0);
 }
+
+void	free_env(char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i])
+		free(envp[i++]);
+	free(envp);
+}

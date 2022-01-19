@@ -85,11 +85,9 @@ char	**ret_env(t_all *all)
 	char	*tmp_value;
 	t_env	*tmp;
 
-	env = malloc(sizeof(char *) * all->env->num_env);
+	env = malloc(sizeof(char *) * (all->env->num_env + 1));
 	if (env == NULL)
-	{
-		//malloc실패
-	}
+		error_exit("Malloc Failure\n", 1);
 	i = 0;
 	tmp = all->env->head;
 	while (tmp)

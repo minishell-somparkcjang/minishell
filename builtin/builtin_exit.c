@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-void	ms_exit(char **content, t_all *all)
+void	ms_exit(char **content)
 {
 	int	valid;
 	int	i;
@@ -8,7 +8,7 @@ void	ms_exit(char **content, t_all *all)
 	valid = 1;
 	if (content[1] == NULL)
 	{
-		printf("exit\n");
+		ft_putendl_fd("exit\n", 1);
 		exit(0);
 	} //exit 123 123
 	i = 0;
@@ -25,19 +25,19 @@ void	ms_exit(char **content, t_all *all)
 		}
 		if (valid)
 		{
-			printf("exit\n");
+			ft_putendl_fd("exit\n", 1);
 			exit(ft_atoi(content[1]));
 		}
 		else
 		{
-			printf("exit\nminishell: exit %s: numeric argument required\n", content[1]);
-			exit(255);
+			error_print("exit\nminishell: exit ", 255);
+			error_print(content[1], 255);
+			error_exit(": numeric argument required\n", 255);
 		}
 	}
 	else
 	{
-		g_exit_code = 1;
-		printf("exit\nminishell: exit: too many arguments\n");
+		error_print("exit\nminishell: exit: too many arguments\n", 1);
 		return ;
 	}
 }

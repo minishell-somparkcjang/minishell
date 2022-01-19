@@ -1,19 +1,5 @@
 #include "../include/minishell.h"
 
-// /* 구조체화 된 환경변수 출력 */
-// static void	print_env(t_all *all)
-// {
-// 	t_env	*tmp;
-
-// 	tmp = all->env->head;
-// 	printf("env_num: %d\n", all->env->num_env);
-// 	while (tmp)
-// 	{
-// 		printf("key:%s, value:%s\n", tmp->key, tmp->value);
-// 		tmp = tmp->next;
-// 	}
-// }
-
 /* 환경변수 linked list로 세팅 */
 static void	set_env(char *key, char *value, t_all *all)
 {
@@ -21,9 +7,8 @@ static void	set_env(char *key, char *value, t_all *all)
 	t_env	*tmp;
 
 	env_node = malloc(sizeof(t_env));
-	// error처리
 	if (env_node == NULL)
-		return ;
+		error_exit("Malloc Failure\n", 1);
 	env_node->key = key;
 	env_node->value = value;
 	env_node->next = NULL;
@@ -88,9 +73,8 @@ void	init_env(t_all *all, char **env)
 
 	i = 0;
 	all->env = malloc(sizeof(t_env_lst));
-	//error처리
 	if (all->env == NULL)
-		return ;
+		error_exit("Malloc Failure\n", 1);
 	all->env->num_env = 0;
 	all->env->head = NULL;
 	while (env[i])
@@ -105,5 +89,4 @@ void	init_env(t_all *all, char **env)
 	}
 	all->pip_cnt = 0;
 	all->parser = NULL;
-	// print_env(all);
 }

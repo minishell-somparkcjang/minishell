@@ -1,7 +1,7 @@
 #include "../include/minishell.h"
 
 /* pwd */
-static void	ms_pwd(t_all *all)
+static void	ms_pwd(void)
 {
 	char		*s;
 
@@ -36,11 +36,11 @@ void	exec_builtin(t_command *str, t_all *all)
 	command = str->command;
 	content = str->content;
 	if (ft_strcmp(command, "echo") || ft_strcmp(command, "ECHO"))
-		ms_echo(content, all);
+		ms_echo(content);
 	else if (ft_strcmp(command, "cd"))
 		ms_cd(content, all);
 	else if (ft_strcmp(command, "pwd") || ft_strcmp(command, "PWD"))
-		ms_pwd(all);
+		ms_pwd();
 	else if (ft_strcmp(command, "export"))
 		ms_export(content, all);
 	else if (ft_strcmp(command, "unset"))
@@ -48,17 +48,15 @@ void	exec_builtin(t_command *str, t_all *all)
 	else if (ft_strcmp(command, "env") || ft_strcmp(command, "ENV"))
 		ms_env(all);
 	else if (ft_strcmp(command, "exit"))
-		ms_exit(content, all);
+		ms_exit(content);
 }
 
 //str = parser->right
-int is_builtin(t_command *str, t_all *all)
+int is_builtin(t_command *str)
 {
 	char *command;
-	char **content;
 
 	command = str->command;
-	content = str->content;
 	if (ft_strcmp(command, "echo") || ft_strcmp(command, "ECHO")
 		|| ft_strcmp(command, "cd") || ft_strcmp(command, "pwd")
 		|| ft_strcmp(command, "PWD") || ft_strcmp(command, "export")

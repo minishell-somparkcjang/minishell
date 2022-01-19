@@ -19,7 +19,7 @@ static int	is_option(char *content)
 	return (1);
 }
 
-void	ms_echo(char **content, t_all *all)
+void	ms_echo(char **content)
 {
 	int			i;
 	int		nlflag;

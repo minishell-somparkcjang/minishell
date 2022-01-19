@@ -11,7 +11,7 @@ static char	*search_path(char *command, char **paths)
 	while (paths[i])
 	{
 		cmd = ft_strjoin("/", command);
-		path = ft_strjoin(paths[i], cmd); // "/usr/bin/ls"
+		path = ft_strjoin(paths[i], cmd);
 		free(cmd);
 		fd = open(path, O_RDONLY);
 		if (fd > -1)
@@ -31,7 +31,7 @@ static char	*get_path(t_command *command, t_all *all)
 	char	**paths;
 	char	*path;
 
-	path = find_env_key(all, "PATH"); // "/usr/bin:/bin:/usr/sbin:/sbin:/usr/"
+	path = find_env_key(all, "PATH");
 	if (!path)
 		return (NULL);
 	paths = ft_split(path, ':');
@@ -47,10 +47,9 @@ void	exec_cmd(t_command *command, t_all *all, char **envp)
 {
 	char	*path;
 
-	printf("test3-cmd: %s, ct: %s\n", command->command, command->content[1]);
 	path = get_path(command, all);
 	execve(path, command->content, envp);
-	//error처리
+	error_handler(command->command, errno);
 }
 
 void	set_exit(int status)

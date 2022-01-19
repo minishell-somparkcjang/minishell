@@ -22,16 +22,12 @@ static void	set_env(char *content, t_all *all)
 	char	*key;
 
 	idx = is_equal(content);
-	//ex) export test1
 	if (idx == -1)
 	{
 		value = find_env_key(all, content);
 		if (!value)
-		{
 			set_env_value(all, ft_strdup(content), NULL);
-		}
 	}
-	//ex) export test1=test 5  10
 	else
 	{
 		len = ft_strlen(content);
@@ -82,8 +78,9 @@ void	ms_export(char **content, t_all *all)
 		}
 		else
 		{
-			printf("minishell: export: `%s': not a valid identifier\n", content[i]);
-			g_exit_code = 1;
+			error_print("minishell: export: `", 1);
+			error_print(content[i], 1);
+			error_print("': not a valid identifier\n", 1);
 		}
 		i++;
 	}
