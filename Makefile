@@ -7,16 +7,20 @@ LIBFT_A = libft/libft.a
 
 SRCS_DIR = ./
 SRCS_FILE = main.c\
-			parse/token_func.c\
+			parse/parse_assemble.c\
+			parse/parse_func.c\
+			parse/parse_init.c\
+			parse/parse.c\
 			parse/token_env.c\
-			parse/token_str.c\
-			parse/token_type.c\
+			parse/token_func.c\
+			parse/token_init.c\
+			parse/token_quote.c\
 			parse/token_redirection.c\
 			parse/token_redirection2.c\
-			parse/parse_assemble.c\
+			parse/token_special.c\
+			parse/token_str.c\
+			parse/token_type.c\
 			parse/tokenization.c\
-			parse/parse.c\
-			parse/parse_func.c\
 			parse//utils.c\
 			env/init_env.c\
 			env/env_func.c\

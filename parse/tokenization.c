@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:02:15 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/19 23:48:17 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/20 15:49:20 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,10 @@ static int	token_struct_func(t_token **token_head, t_token **token)
 	return (0);
 }
 
-t_token	*tokenization(char *s)
+t_token	*tokenization(t_all *all, char *s)
 {
 	int			i;
 	int			s_len;
-	int			i_check;
 	t_token		*token_head;
 	t_token		*token;
 
@@ -72,6 +71,8 @@ t_token	*tokenization(char *s)
 	}
 	token_type_func(token_head);
 	if (token_redirection(&token_head) == 1)
+		return (token_free(token_head));
+	if (token_special(token, all) == 1)
 		return (token_free(token_head));
 	return (token_head);
 }

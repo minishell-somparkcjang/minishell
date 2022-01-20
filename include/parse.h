@@ -37,15 +37,22 @@ typedef struct s_parse_all
 }t_parse_all;
 
 /* parse_func */
-void		parse_free(t_parse *parse_head);
-int			parse_size(t_parse *parse_head);
+void			parse_free(t_parse *parse_head);
+int				parse_size(t_parse *parse_head);
 
 /* redirection */
-int			red_apply(t_redirection *red_head);
-int			heredoc_apply(t_parse *parse_head);
+int				red_apply(t_redirection *red_head);
+int				heredoc_apply(t_parse *parse_head);
 
 /* pipe */
-int			pipe_fd_connect(t_parse *parse_prev, t_parse *parse);
-int			pipe_fd_close(t_parse *parse_prev, t_parse *parse);
+int				pipe_fd_connect(t_parse *parse_prev, t_parse *parse);
+int				pipe_fd_close(t_parse *parse_prev, t_parse *parse);
 
+/* parse_func */
+void			*red_free(t_redirection *red);
+
+/* parse_init */
+t_command		*com_malloc_init(t_token *token);
+t_redirection	*red_malloc_init(t_token *token);
+t_parse			*parse_malloc_init(t_redirection *r, t_command *c, t_parse *p);
 #endif

@@ -68,7 +68,7 @@ size_t	ft_strlen_long(const char *s1, const char *s2)
 
 t_parse	*ret_parse_prev(t_all *all, t_parse *parse)
 {
-	t_parse *tmp;
+	t_parse		*tmp;
 
 	tmp = all->parser;
 	if (tmp == parse)

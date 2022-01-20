@@ -33,7 +33,7 @@ static pid_t	make_child(t_all *all, t_parse *parse, int heredoc_count, char **en
 	pid_t	pid;
 	int		ret;
 	t_parse	*parse_prev;
-	
+
 	if (parse->next != NULL)
 		pipe(parse->pipe_fd);
 	parse_prev = ret_parse_prev(all, parse);

@@ -64,12 +64,17 @@ int		is_builtin(t_command *str);
 
 /* parse */
 void	parse_main(char *s, t_all *all);
+t_token	*tokenization(t_all *all, char *s);
 
 /* parse_assemble */
 t_parse	*parse_assemble(t_token *token_head, t_all *all);
 
-/* token_env */
-void	token_env(t_token *token, t_all *all);
+/* token_special */
+int		token_special(t_token *token, t_all *all);
+char	*env_get(char *str, int *i, t_all *all);
+
+/* token_quote */
+char	*double_quote(char *str, int *i, t_all *all);
 
 /* exec */
 void	start_ms(t_all *all);
@@ -78,7 +83,7 @@ void	exec_cmd(t_command *command, t_all *all, char **envp);
 void	set_exit(int status);
 
 /* signal */
-void	signal_handle(void);	
+void	signal_handle(void);
 
 /* error */
 int		error_print(char *str, int exit_code);
