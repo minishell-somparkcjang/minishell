@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:02:15 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/20 15:49:20 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/23 15:36:34 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_token	*tokenization(t_all *all, char *s)
 	token_type_func(token_head);
 	if (token_redirection(&token_head) == 1)
 		return (token_free(token_head));
-	if (token_special(token, all) == 1)
+	if (token_special(token_head, all) == 1)
 		return (token_free(token_head));
 	return (token_head);
 }

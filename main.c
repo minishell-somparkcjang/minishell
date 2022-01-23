@@ -32,11 +32,10 @@ int main(int argc, char **argv, char **envp)
 			parse_main(str, &all);
 			start_ms(&all);
 			parse_free(all.parser);
-			free(str);
 		}
 		else
 			g_exit_code = 258;
+		free(str);
 	}
 	return (0);
 }
-

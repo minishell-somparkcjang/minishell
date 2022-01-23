@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 01:01:11 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/20 00:42:51 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/23 16:05:58 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	token_rs_fdout(t_token *token, char **str_split, int *i)
 	if (token->str[*i] != '\0')
 	{
 		while (token->str[*i] != '\0')
-			i++;
+			*i += 1;
 		str_split[2] = token_str_return(token->str, i_start, *i);
 		if (str_split[2] == NULL)
 		{

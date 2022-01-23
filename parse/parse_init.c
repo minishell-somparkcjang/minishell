@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 17:01:48 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/20 18:37:06 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/23 16:53:00 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,6 @@ t_command	*com_malloc_init(t_token *token)
 	if (!command)
 		return (error_print_null(strerror(errno), 1));
 	command->command = NULL;
-	command->content = (char **)malloc((com_len + 1) * sizeof(char *));
-	if (!command->content)
-		return (error_print_null(strerror(errno), 1));
 	if (com_con_malloc_init(command, token, com_len) == 1)
 	{
 		free(command);

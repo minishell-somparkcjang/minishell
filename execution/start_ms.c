@@ -20,10 +20,13 @@ static int	exec_child(t_parse *parse, t_parse *parse_prev, t_all *all, pid_t pid
 	pipe_fd_connect(parse_prev, parse);
 	if (red_apply(parse->left) == 1)
 		return (pid);
-	if (is_builtin(parse->right))
-		exec_builtin(parse->right, all);
-	else
-		exec_cmd(parse->right, all, envp);
+	if (parse->right != NULL)
+	{
+		if (is_builtin(parse->right))
+			exec_builtin(parse->right, all);
+		else
+			exec_cmd(parse->right, all, envp);
+	}
 	exit(g_exit_code);
 	return (0);
 }
@@ -86,10 +89,13 @@ static void	single_cmd(t_all *all, int heredoc_count)
 	envp = ret_env(all);
 	if (red_apply(all->parser->left) == 1)
 		return ;
-	if (is_builtin(all->parser->right))
-		exec_builtin(all->parser->right, all);
-	else
-		exec_single_cmd(all->parser->right, all, envp);
+	if (all->parser->right != NULL)
+	{
+		if (is_builtin(all->parser->right))
+			exec_builtin(all->parser->right, all);
+		else
+			exec_single_cmd(all->parser->right, all, envp);
+	}
 	std_restore(stdin, stdout, stderr);
 	free_env(envp);
 }
