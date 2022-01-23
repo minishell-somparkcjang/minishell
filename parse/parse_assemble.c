@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 16:54:40 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/20 18:37:25 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/23 19:12:36 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_redirection	*red_linked_list(t_token *token)
 	return (red_head);
 }
 
-static int	pip_check(t_parse *parse, t_token **token)
+static int	pip_check(t_parse **parse, t_token **token)
 {
 	t_parse			*parse_tmp;
 
@@ -52,8 +52,8 @@ static int	pip_check(t_parse *parse, t_token **token)
 		parse_tmp = parse_malloc_init(NULL, NULL, NULL);
 		if (parse_tmp == NULL)
 			return (error_print(strerror(errno), 1));
-		parse->next = parse_tmp;
-		parse = parse_tmp;
+		(*parse)->next = parse_tmp;
+		*parse = parse_tmp;
 		*token = (*token)->next;
 	}
 	return (0);
@@ -80,7 +80,7 @@ static int	token_to_parse(t_parse *parse_head, t_token *token)
 			if (parse->right == NULL)
 				return (1);
 		}
-		if (pip_check(parse, &token) == 1)
+		if (pip_check(&parse, &token) == 1)
 			return (1);
 	}
 	return (0);
