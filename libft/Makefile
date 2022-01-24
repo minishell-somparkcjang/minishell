@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/02 21:32:11 by sompark           #+#    #+#              #
-#    Updated: 2021/03/04 20:46:59 by sompark          ###   ########.fr        #
+#    Updated: 2022/01/24 17:34:35 by cjang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,15 +57,18 @@ SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
+	@ar rc $(NAME) $(OBJS)
+
+%.o: %.c
+	@$(CC) -c $(CFLAGS) -o $@ $<
 
 all: $(NAME)
 
 clean:
-		$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 
 fclean: clean
-		$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 

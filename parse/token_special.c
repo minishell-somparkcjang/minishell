@@ -6,26 +6,35 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 18:03:10 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/24 15:32:17 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/24 16:13:24 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	token_str_change(t_token *token, char *s, int index)
+static int	token_str_change(t_token *token, char *s, int *index)
 {
 	char	*s_tmp;
 
-	if (index == 0)
+	if (index[1] == 0)
 		free(s);
 	else
 	{
 		s_tmp = s;
-		s = ft_strjoin(s, &token->str[index]);
+		s = ft_strjoin(s, &token->str[index[1]]);
 		free(s_tmp);
-		free(token->str);
 		if (s == NULL)
+		{
+			free(token->str);
 			return (error_print(strerror(errno), 1));
+		}
+		else if (ft_strlen(s) == 0 && token->type == r_file && index[2] == 0)
+		{
+			free(s);
+			return (error_print3(\
+			"minishell: ", token->str, ": ambiguous redirect", 1));
+		}
+		free(token->str);
 		token->str = s;
 	}
 	return (0);
@@ -113,7 +122,7 @@ int	token_special(t_token *token, t_all *all)
 			if (token_special_func(all, token, &s, index) == 1)
 				return (1);
 		}
-		if (token_str_change(token, s, index[1]) == 1)
+		if (token_str_change(token, s, index) == 1)
 			return (1);
 		if (ft_strlen(token->str) == 0 && index[2] == 0)
 			token->type = nontype;

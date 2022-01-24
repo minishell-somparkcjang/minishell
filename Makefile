@@ -52,19 +52,19 @@ $(LIBFT):
 	@make -C $(LIBFT)
 
 $(NAME_MINISHELL): $(LIBFT_A) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME_MINISHELL) $(READLINE)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME_MINISHELL) $(READLINE)
 
 %.o: %.c
-	$(CC) -c $(CFLAGS) -o $@ $<
+	@$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:
-	make clean -C $(LIBFT)
-	rm -f $(OBJS)
+	@make clean -C $(LIBFT)
+	@rm -f $(OBJS)
 
 fclean: clean
-	make fclean -C $(LIBFT)
-	rm -f $(NAME_MINISHELL)
+	@make fclean -C $(LIBFT)
+	@rm -f $(NAME_MINISHELL)
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re $(LIBFT)
+.PHONY: all bonus clean fclean re $(LIBFT) $(LIBFT_A)
