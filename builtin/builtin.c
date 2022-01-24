@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:11:22 by sompark           #+#    #+#             */
-/*   Updated: 2022/01/24 12:11:27 by sompark          ###   ########.fr       */
+/*   Updated: 2022/01/24 14:59:34 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,14 @@ int	is_builtin(t_command *str)
 	command = str->command;
 	lower_command = ft_tolower(command);
 	if (ft_strcmp(lower_command, "echo")
-		|| ft_strcmp(command, "cd") || ft_strcmp(lower_command, "pwd") || ft_strcmp(command, "export")
-		|| ft_strcmp(command, "unset") || ft_strcmp(lower_command, "env") || ft_strcmp(command, "exit"))
-		{
-			free(lower_command);
-			return (1);
-		}
+		|| ft_strcmp(command, "cd")
+		|| ft_strcmp(lower_command, "pwd") || ft_strcmp(command, "export")
+		|| ft_strcmp(command, "unset") || ft_strcmp(lower_command, "env")
+		|| ft_strcmp(command, "exit"))
+	{
+		free(lower_command);
+		return (1);
+	}
 	free(lower_command);
 	return (0);
 }

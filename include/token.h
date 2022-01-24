@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 22:33:28 by cjang             #+#    #+#             */
+/*   Updated: 2022/01/24 22:40:09 by cjang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TOKEN_H
 # define TOKEN_H
 
@@ -59,4 +71,7 @@ void		*error_print_null(char *str, int exit_code);
 /* parse_func */
 int			token_com_len(t_token *token);
 int			token_red_len(t_token *token);
+
+/* parse */
+void		print_token(t_token *token);
 #endif

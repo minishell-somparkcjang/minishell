@@ -43,7 +43,7 @@ static void	set_env(char *content, t_all *all)
 	else
 	{
 		len = ft_strlen(content);
-		key = ft_substr(content, 0, len - idx);
+		key = ft_substr(content, 0, idx);
 		value = ft_substr(content, idx + 1, len - (idx + 1));
 		set_env_value(all, ft_strdup(key), ft_strdup(value));
 		free(key);

@@ -16,7 +16,7 @@ static void	exit_valid(int valid, char *content)
 {
 	if (valid)
 	{
-		ft_putendl_fd("exit\n", 1);
+		ft_putendl_fd("exit", 2);
 		exit(ft_atoi(content));
 	}
 	else
@@ -36,7 +36,7 @@ void	ms_exit(char **content)
 	i = 0;
 	if (content[1] == NULL)
 	{
-		ft_putendl_fd("exit\n", 1);
+		ft_putendl_fd("exit", 2);
 		exit(0);
 	}
 	if (content[2] == NULL)

@@ -14,14 +14,14 @@
 
 void	error_exit(char *str, int exit_code)
 {
-	ft_putendl_fd(str, 2);
+	ft_putstr_fd(str, 2);
 	g_exit_code = exit_code;
 	exit(exit_code);
 }
 
 int	error_print(char *str, int exit_code)
 {
-	ft_putendl_fd(str, 2);
+	ft_putstr_fd(str, 2);
 	g_exit_code = exit_code;
 	return (1);
 }

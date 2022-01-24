@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_func.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:11:32 by sompark           #+#    #+#             */
-/*   Updated: 2022/01/24 12:11:34 by sompark          ###   ########.fr       */
+/*   Updated: 2022/01/24 18:24:39 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ void	set_env_value(t_all *all, char *key, char *newvalue)
 			return ;
 		}
 		if (tmp->next == NULL)
-		{		
+		{	
 			tmp->next = make_newenv(key, newvalue);
+			printf("key:%s value: %s\n", tmp->next->key, tmp->next->value);
 			all->env->num_env++;
 			return ;
 		}
@@ -57,7 +58,10 @@ static char	*make_env(t_env *tmp)
 	char	*tmp_str;
 
 	tmp_key = ft_strdup(tmp->key);
-	tmp_value = ft_strdup(tmp->value);
+	if (tmp->value)
+		tmp_value = ft_strdup(tmp->value);
+	else
+		tmp_value = ft_strdup("");
 	tmp_str = ft_strjoin(tmp_key, "=");
 	free(tmp_key);
 	tmp_key = ft_strjoin(tmp_str, tmp_value);

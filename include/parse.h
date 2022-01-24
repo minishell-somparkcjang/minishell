@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 22:33:22 by cjang             #+#    #+#             */
+/*   Updated: 2022/01/24 22:41:27 by cjang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSE_H
 # define PARSE_H
 
@@ -55,4 +67,7 @@ void			*red_free(t_redirection *red);
 t_command		*com_malloc_init(t_token *token);
 t_redirection	*red_malloc_init(t_token *token);
 t_parse			*parse_malloc_init(t_redirection *r, t_command *c, t_parse *p);
+
+/* parse */
+void			print_parse(t_parse *parse);
 #endif

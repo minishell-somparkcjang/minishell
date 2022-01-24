@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 18:03:29 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/24 15:33:00 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/24 22:39:46 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	*type_check(t_type type)
 	return (str);
 }
 
-static void	print_token(t_token *token)
+void	print_token(t_token *token)
 {
 	char	*type;
 
@@ -52,27 +52,31 @@ static void	print_token(t_token *token)
 	printf("\n");
 }
 
-static void	print_parse(t_parse *parse)
+static void	print_red(t_redirection *red)
 {
-	t_redirection	*red;
+	char			*type;
+
+	while (red != NULL)
+	{
+		type = type_check(red->type);
+		printf("	[red]	[%d][%s][%d][%s]\n", \
+		red->fd_left, type, red->fd_right, red->file_name);
+		red = red->next;
+	}	
+}
+
+void	print_parse(t_parse *parse)
+{
 	t_command		*com;
 	int				i;
-	char			*type;
 	char			**str;
 
 	i = 0;
 	while (parse != NULL)
 	{
 		printf("[par][%d]\n", i++);
-		red = parse->left;
 		com = parse->right;
-		while (red != NULL)
-		{
-			type = type_check(red->type);
-			printf("	[red]	[%d][%s][%d][%s]\n", \
-			red->fd_left, type, red->fd_right, red->file_name);
-			red = red->next;
-		}
+		print_red(parse->left);
 		if (com != NULL)
 		{
 			printf("	[com]	[%s]: ", com->command);
@@ -97,7 +101,6 @@ void	parse_main(char *s, t_all *all)
 	token_head = tokenization(all, s);
 	if (token_head == NULL)
 		return ;
-	// print_token(token_head);
 	parse_head = parse_assemble(token_head, all);
 	if (parse_head == NULL)
 	{
@@ -105,6 +108,5 @@ void	parse_main(char *s, t_all *all)
 		return ;
 	}
 	token_free(token_head);
-	// print_parse(parse_head);
 	all->parser = parse_head;
 }
