@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 17:59:15 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/20 18:35:15 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/24 00:29:53 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	parse_free(t_parse *parse_head)
 		parse = parse->next;
 		free(parse_prev);
 	}
-	parse_head = NULL;
 }
 
 int	parse_size(t_parse *parse_head)

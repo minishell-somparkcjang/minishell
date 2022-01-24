@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 01:08:23 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/20 14:28:51 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/24 00:42:14 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*single_quote(char *str, int *i)
 		return (str_return);
 	}
 	else
-		exit(error_print("please write another ['].", 1));
+		return (error_print_null("please write another ['].", 1));
 }
 
 static char	*dq_in_env(t_all *all, char *str, char *str_return, int *index)
@@ -82,10 +82,7 @@ static char	*dq_pair_check(char *str, char *str_return, int *i, int *index)
 		return (str_return);
 	}
 	else
-	{
-		error_print("please write another [\"].", 1);
-		return (NULL);
-	}
+		return (error_print_null("please write another [\"].", 1));
 }
 
 static char	*dq_check_init(char *str, int *i, int *index)
@@ -117,6 +114,8 @@ char	*double_quote(char *str, int *i, t_all *all)
 	str_return = dq_check_init(str, i, index);
 	if (str_return == NULL)
 		return (NULL);
+	else if (ft_strlen(str_return) == 0)
+		return (str_return);
 	while (str[index[0]] != '"' && str[index[0]] != '\0')
 	{
 		if (str[index[0]] == '$')

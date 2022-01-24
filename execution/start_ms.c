@@ -104,6 +104,8 @@ void	start_ms(t_all *all)
 {
 	int heredoc_count;
 
+	if (all->parser == NULL)
+		return ;
 	heredoc_count = heredoc_apply(all->parser);
 	if (heredoc_count < 0)
 		return ;
