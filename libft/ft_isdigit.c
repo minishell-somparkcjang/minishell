@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/26 13:44:40 by cjang             #+#    #+#             */
-/*   Updated: 2021/07/16 15:57:13 by cjang            ###   ########.fr       */
+/*   Created: 2020/12/24 14:35:31 by sompark           #+#    #+#             */
+/*   Updated: 2020/12/24 15:11:36 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int	ft_isdigit(int c)
 {
-	if (c >= 48 && c <= 57)
+	if (48 <= c && c <= 57)
 		return (1);
-	else
-		return (0);
+	return (0);
 }

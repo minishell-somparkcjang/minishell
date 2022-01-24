@@ -3,23 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/22 11:32:01 by cjang             #+#    #+#             */
-/*   Updated: 2020/12/24 16:52:58 by cjang            ###   ########.fr       */
+/*   Created: 2021/01/29 13:52:56 by sompark           #+#    #+#             */
+/*   Updated: 2022/01/24 12:10:25 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *source, size_t num)
 {
-	unsigned char	*tmp;
+	unsigned char	*dst;
+	unsigned char	*src;
 
-	tmp = (unsigned char *)dst;
-	if (dst == 0 && src == 0)
-		return (NULL);
-	while (n-- > 0)
-		*tmp++ = *(unsigned char *)src++;
-	return (dst);
+	if (!dest && !source)
+		return (0);
+	dst = (unsigned char *)dest;
+	src = (unsigned char *)source;
+	while (num--)
+	{
+		*dst++ = *src++;
+	}
+	return (dest);
 }

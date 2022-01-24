@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_unset.c                                    :+:      :+:    :+:   */
+/*   env_func2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 12:11:19 by sompark           #+#    #+#             */
+/*   Created: 2022/01/24 12:11:36 by sompark           #+#    #+#             */
 /*   Updated: 2022/01/24 12:12:25 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	delete_env(t_all *all, char *key)
+/* t_env에서 key값을 찾아 value를 반환 */
+char	*find_env_key(t_all *all, char *key)
+{
+	t_env	*tmp;
+
+	tmp = all->env->head;
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->key, key))
+			return (tmp->value);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+/* t_env에서 key값을 찾아 t_env값 삭제 */
+void	delete_env_key(t_all *all, char *key)
 {
 	t_env	*tmp1;
 	t_env	*tmp2;
@@ -21,7 +37,7 @@ static void	delete_env(t_all *all, char *key)
 	tmp2 = all->env->head;
 	while (tmp2)
 	{
-		if (ft_strncmp(tmp2->key, key, ft_strlen_long(tmp2->key, key)) == 0)
+		if (ft_strcmp(tmp2->key, key))
 		{
 			if (tmp1 == NULL)
 				all->env->head = tmp2->next;
@@ -38,29 +54,12 @@ static void	delete_env(t_all *all, char *key)
 	}
 }
 
-void	ms_unset(char **content, t_all *all)
+void	free_env(char **envp)
 {
 	int	i;
 
-	if (content[1] == NULL)
-	{
-		g_exit_code = 0;
-		return ;
-	}
-	i = 1;
-	while (content[i])
-	{
-		if (ft_isalpha(content[i][0]) || content[i][0] == '_')
-		{
-			delete_env(all, content[i]);
-			g_exit_code = 0;
-		}
-		else
-		{
-			error_print("minishell: unset: `", 1);
-			error_print(content[i], 1);
-			error_print("': not a valid identifier\n", 1);
-		}
-		i++;
-	}
+	i = 0;
+	while (envp[i])
+		free(envp[i++]);
+	free(envp);
 }

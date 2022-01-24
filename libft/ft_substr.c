@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/28 03:26:17 by cjang             #+#    #+#             */
-/*   Updated: 2021/07/16 15:53:55 by cjang            ###   ########.fr       */
+/*   Created: 2021/02/24 00:54:01 by sompark           #+#    #+#             */
+/*   Updated: 2021/03/03 11:41:35 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*sub;
-	size_t	s_len;
+	char			*ret;
+	unsigned int	s_len;
 
 	if (!s)
-		return (NULL);
+		return (0);
+	ret = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ret)
+		return (0);
 	s_len = ft_strlen(s);
-	sub = malloc(len + 1);
-	if (!sub)
-		return (NULL);
 	if (s_len <= start)
 	{
-		*sub = 0;
-		return (sub);
+		ret[0] = 0;
+		return (ret);
 	}
-	ft_strlcpy(sub, &s[start], len + 1);
-	return (sub);
+	ft_strlcpy(ret, s + start, len + 1);
+	return (ret);
 }

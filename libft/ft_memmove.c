@@ -3,27 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/22 19:05:54 by cjang             #+#    #+#             */
-/*   Updated: 2020/12/24 16:06:19 by cjang            ###   ########.fr       */
+/*   Created: 2021/02/22 02:28:43 by sompark           #+#    #+#             */
+/*   Updated: 2021/02/23 02:31:36 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dest, const void *source, size_t num)
 {
-	unsigned char	*tmp_1;
-	unsigned char	*tmp_2;
+	unsigned char	*dst;
+	unsigned char	*src;
+	size_t			i;
 
-	tmp_1 = (unsigned char *)dst;
-	tmp_2 = (unsigned char *)src;
-	if (dst > src)
-		while (len-- > 0)
-			tmp_1[len] = tmp_2[len];
-	else if (dst < src)
-		while (len-- > 0)
-			*tmp_1++ = *tmp_2++;
-	return (dst);
+	dst = (unsigned char *)dest;
+	src = (unsigned char *)source;
+	i = 0;
+	if (src < dst)
+	{
+		while (i < num)
+		{
+			dst[num - 1 - i] = src[num - 1 - i];
+			i++;
+		}
+		return (dest);
+	}
+	else if (src > dst)
+	{
+		while (i < num)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+	}
+	return (dest);
 }

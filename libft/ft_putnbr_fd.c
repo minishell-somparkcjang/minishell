@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 19:26:52 by cjang             #+#    #+#             */
-/*   Updated: 2020/12/29 19:32:33 by cjang            ###   ########.fr       */
+/*   Created: 2021/02/26 14:45:49 by sompark           #+#    #+#             */
+/*   Updated: 2021/02/26 15:01:38 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,17 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	int		digit;
-	char	c;
+	long long	num;
+	char		c;
 
-	digit = 1;
-	if (n == -2147483648)
+	num = (long long)n;
+	if (num < 0)
 	{
-		write(fd, "-2147483648", 11);
-		return ;
-	}
-	else if (n < 0)
-	{
+		num = -num;
 		write(fd, "-", 1);
-		n *= -1;
 	}
-	while (n / 10 >= digit)
-		digit *= 10;
-	while (digit > 0)
-	{
-		c = n / digit + '0';
-		write(fd, &c, 1);
-		n %= digit;
-		digit /= 10;
-	}
+	if (num >= 10)
+		ft_putnbr_fd(num / 10, fd);
+	c = '0' + (num % 10);
+	write(fd, &c, 1);
 }

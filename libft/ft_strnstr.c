@@ -3,37 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/25 14:07:34 by cjang             #+#    #+#             */
-/*   Updated: 2020/12/25 15:30:30 by cjang            ###   ########.fr       */
+/*   Created: 2020/12/24 16:17:05 by sompark           #+#    #+#             */
+/*   Updated: 2021/03/04 20:51:20 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t n)
 {
-	size_t	n;
+	size_t	i;
+	size_t	j;
+	size_t	pos;
 
-	if (!*needle)
-		return ((char *)haystack);
-	while (*haystack && len > 0)
+	if (!*little)
+		return ((char *)big);
+	if (n == 0)
+		return (NULL);
+	pos = 0;
+	while (big[pos] && pos < n)
 	{
-		if (*haystack == *needle)
+		i = 0;
+		j = pos;
+		while (little[i] && big[j] == little[i] && j < n)
 		{
-			n = 0;
-			while (haystack[n] == needle[n] && needle[n] && len > 0)
-			{
-				n++;
-				len--;
-			}
-			if (!needle[n])
-				return ((char *)haystack);
-			len += n;
+			i++;
+			j++;
 		}
-		haystack++;
-		len--;
+		if (little[i] == '\0')
+			return ((char *)(big + pos));
+		pos++;
 	}
 	return (NULL);
 }

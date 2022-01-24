@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/23 05:00:36 by cjang             #+#    #+#             */
-/*   Updated: 2020/12/25 17:52:26 by cjang            ###   ########.fr       */
+/*   Created: 2021/02/22 02:59:03 by sompark           #+#    #+#             */
+/*   Updated: 2021/03/04 19:46:02 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t	str_len;
+	size_t	i;
+	size_t	src_len;
 
-	str_len = 0;
-	if (!dst || !src)
+	i = 0;
+	if (!dst && !src)
 		return (0);
-	while (src[str_len])
-		str_len++;
-	while (dstsize > 1 && *src)
+	src_len = ft_strlen(src);
+	if (dstsize == 0)
+		return (src_len);
+	while (src[i] && i + 1 < dstsize)
 	{
-		*dst++ = *src++;
-		dstsize--;
+		dst[i] = src[i];
+		i++;
 	}
-	if (dstsize > 0)
-		*dst = '\0';
-	return (str_len);
+	dst[i] = '\0';
+	return (src_len);
 }

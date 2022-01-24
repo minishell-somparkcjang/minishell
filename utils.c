@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 12:12:15 by sompark           #+#    #+#             */
+/*   Updated: 2022/01/24 14:58:38 by cjang            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./include/minishell.h"
 
 /* 문자열비교 */
@@ -68,7 +80,7 @@ size_t	ft_strlen_long(const char *s1, const char *s2)
 
 t_parse	*ret_parse_prev(t_all *all, t_parse *parse)
 {
-	t_parse		*tmp;
+	t_parse	*tmp;
 
 	tmp = all->parser;
 	if (tmp == parse)
@@ -99,14 +111,4 @@ int	ft_isspace(char *str)
 	if (nb == ft_strlen(str))
 		return (1);
 	return (0);
-}
-
-void	free_env(char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i])
-		free(envp[i++]);
-	free(envp);
 }

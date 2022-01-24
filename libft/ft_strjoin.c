@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/28 17:08:58 by cjang             #+#    #+#             */
-/*   Updated: 2021/07/16 15:46:56 by cjang            ###   ########.fr       */
+/*   Created: 2021/02/24 01:11:47 by sompark           #+#    #+#             */
+/*   Updated: 2022/01/24 12:09:53 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,24 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*s1s2;
-	size_t	len[2];
-	size_t	i;
+	char	*ret;
+	size_t	s1_len;
+	size_t	s2_len;
 
-	i = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	len[0] = ft_strlen(s1);
-	len[1] = ft_strlen(s2);
-	s1s2 = (char *)malloc(len[0] + len[1] + 1);
-	if (!s1s2)
-		return (NULL);
-	while (*s1)
-		s1s2[i++] = *s1++;
-	while (*s2)
-		s1s2[i++] = *s2++;
-	s1s2[i] = 0;
-	return (s1s2);
+	if (!s1 && !s2)
+		return (0);
+	else if (!s1 || !s2)
+	{
+		if (!s1)
+			return (ft_strdup(s2));
+		return (ft_strdup(s1));
+	}
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	ret = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!ret)
+		return (0);
+	ft_strlcpy(ret, s1, s1_len + 1);
+	ft_strlcpy(ret + s1_len, s2, s2_len + 1);
+	return (ret);
 }

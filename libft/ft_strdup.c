@@ -3,32 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/28 02:05:28 by cjang             #+#    #+#             */
-/*   Updated: 2021/07/16 15:55:40 by cjang            ###   ########.fr       */
+/*   Created: 2021/02/23 02:44:41 by sompark           #+#    #+#             */
+/*   Updated: 2021/03/03 11:39:08 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *src)
 {
-	size_t		i;
-	size_t		len;
-	char		*cp;
+	char	*tmp;
+	size_t	src_len;
+	size_t	i;
 
 	i = 0;
-	len = 0;
-	while (s1[len])
-		len++;
-	cp = (char *)malloc(len + 1);
-	if (!cp)
-		return (NULL);
-	while (i < len + 1)
+	src_len = ft_strlen(src);
+	tmp = malloc(src_len + 1);
+	if (!tmp)
+		return (0);
+	while (src[i])
 	{
-		cp[i] = s1[i];
+		tmp[i] = src[i];
 		i++;
 	}
-	return (cp);
+	tmp[i] = 0;
+	return (tmp);
 }

@@ -24,6 +24,7 @@ SRCS_FILE = main.c\
 			parse//utils.c\
 			env/init_env.c\
 			env/env_func.c\
+			env/env_func2.c\
 			redirection/redirection.c\
 			redirection/heredoc.c\
 			redirection/std_backup.c\

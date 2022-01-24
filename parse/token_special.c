@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 18:03:10 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/20 18:36:12 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/24 15:32:17 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static int	token_str_change(t_token *token, char *s, int index)
 	{
 		s_tmp = s;
 		s = ft_strjoin(s, &token->str[index]);
-		if (s == NULL)
-			return (error_print(strerror(errno), 1));
 		free(s_tmp);
 		free(token->str);
+		if (s == NULL)
+			return (error_print(strerror(errno), 1));
 		token->str = s;
 	}
 	return (0);
@@ -54,6 +54,8 @@ static char	*special_apply(t_all *all, t_token *token, char *s, int *index)
 	char	*s_next;
 
 	s_next = NULL;
+	if (token->str[index[0]] == '"' || token->str[index[0]] == '\'')
+		index[2] = 1;
 	if (token->str[index[0]] == '"')
 		s_next = double_quote(&token->str[index[1]], &index[0], all);
 	else if (token->str[index[0]] == '\'')
@@ -63,7 +65,7 @@ static char	*special_apply(t_all *all, t_token *token, char *s, int *index)
 	if (s_next == NULL)
 	{
 		free(s);
-		return (error_print_null(strerror(errno), 1));
+		return (NULL);
 	}
 	s_tmp = s;
 	s = ft_strjoin(s, s_next);
@@ -80,10 +82,10 @@ static int	token_special_func(t_all *all, t_token *token, char **s, int *index)
 	|| token->str[index[0]] == '$')
 	{
 		*s = prev_special(token, *s, index);
-		if (s == NULL)
+		if (*s == NULL)
 			return (1);
 		*s = special_apply(all, token, *s, index);
-		if (s == NULL)
+		if (*s == NULL)
 			return (1);
 		index[1] = index[0];
 	}
@@ -95,7 +97,7 @@ static int	token_special_func(t_all *all, t_token *token, char **s, int *index)
 int	token_special(t_token *token, t_all *all)
 {
 	char	*s;
-	int		index[2];
+	int		index[3];
 
 	while (token != NULL)
 	{
@@ -105,10 +107,16 @@ int	token_special(t_token *token, t_all *all)
 		s[0] = '\0';
 		index[0] = 0;
 		index[1] = 0;
+		index[2] = 0;
 		while (token->str[index[0]] != '\0')
-			token_special_func(all, token, &s, index);
+		{
+			if (token_special_func(all, token, &s, index) == 1)
+				return (1);
+		}
 		if (token_str_change(token, s, index[1]) == 1)
 			return (1);
+		if (ft_strlen(token->str) == 0 && index[2] == 0)
+			token->type = nontype;
 		token = token->next;
 	}
 	return (0);

@@ -3,25 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/25 13:39:55 by cjang             #+#    #+#             */
-/*   Updated: 2020/12/25 14:05:58 by cjang            ###   ########.fr       */
+/*   Created: 2021/01/19 19:11:25 by sompark           #+#    #+#             */
+/*   Updated: 2021/01/20 17:05:16 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strrchr(char *str, int character)
 {
 	char	*tmp;
 
-	tmp = (char *)s;
+	tmp = str;
 	while (*tmp)
 		tmp++;
-	while (*tmp != (char)c && tmp != s)
+	while (tmp != str)
+	{
+		if (*tmp == character)
+			return (tmp);
 		tmp--;
-	if (*tmp == (char)c)
+	}
+	if (*tmp == character)
 		return (tmp);
-	return (NULL);
+	return (0);
 }

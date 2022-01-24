@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 12:11:22 by sompark           #+#    #+#             */
+/*   Updated: 2022/01/24 12:11:27 by sompark          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 /* pwd */
@@ -27,41 +39,46 @@ static void	ms_env(t_all *all)
 	g_exit_code = 0;
 }
 
-//str = parser->right
 void	exec_builtin(t_command *str, t_all *all)
 {
-	char *command;
-	char **content;
+	char	*command;
+	char	**content;
+	char	*lower_command;
 
 	command = str->command;
+	lower_command = ft_tolower(command);
 	content = str->content;
-	if (ft_strcmp(command, "echo") || ft_strcmp(command, "ECHO"))
+	if (ft_strcmp(lower_command, "echo"))
 		ms_echo(content);
 	else if (ft_strcmp(command, "cd"))
 		ms_cd(content, all);
-	else if (ft_strcmp(command, "pwd") || ft_strcmp(command, "PWD"))
+	else if (ft_strcmp(lower_command, "pwd"))
 		ms_pwd();
 	else if (ft_strcmp(command, "export"))
 		ms_export(content, all);
 	else if (ft_strcmp(command, "unset"))
 		ms_unset(content, all);
-	else if (ft_strcmp(command, "env") || ft_strcmp(command, "ENV"))
+	else if (ft_strcmp(lower_command, "env"))
 		ms_env(all);
 	else if (ft_strcmp(command, "exit"))
 		ms_exit(content);
+	free(lower_command);
 }
 
-//str = parser->right
-int is_builtin(t_command *str)
+int	is_builtin(t_command *str)
 {
-	char *command;
+	char	*command;
+	char	*lower_command;
 
 	command = str->command;
-	if (ft_strcmp(command, "echo") || ft_strcmp(command, "ECHO")
-		|| ft_strcmp(command, "cd") || ft_strcmp(command, "pwd")
-		|| ft_strcmp(command, "PWD") || ft_strcmp(command, "export")
-		|| ft_strcmp(command, "unset") || ft_strcmp(command, "env")
-		|| ft_strcmp(command, "ENV") || ft_strcmp(command, "exit"))
-		return (1);
+	lower_command = ft_tolower(command);
+	if (ft_strcmp(lower_command, "echo")
+		|| ft_strcmp(command, "cd") || ft_strcmp(lower_command, "pwd") || ft_strcmp(command, "export")
+		|| ft_strcmp(command, "unset") || ft_strcmp(lower_command, "env") || ft_strcmp(command, "exit"))
+		{
+			free(lower_command);
+			return (1);
+		}
+	free(lower_command);
 	return (0);
 }

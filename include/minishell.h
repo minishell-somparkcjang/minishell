@@ -6,7 +6,6 @@
 # include "redirection.h"
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
@@ -44,6 +43,7 @@ char	*find_env_key(t_all *all, char *key);
 void	delete_env_key(t_all *all, char *key);
 void	set_env_value(t_all *all, char *key, char *newvalue);
 char	**ret_env(t_all *all);
+void	free_env(char **envp);
 
 /* utils */
 size_t	ft_strlen_long(const char *s1, const char *s2);
@@ -54,13 +54,13 @@ int		ft_isspace(char *str);
 void	free_env(char **envp);
 
 /* builtin */
-void	exec_builtin(t_command *str, t_all *all);
-void	ms_cd(char **content, t_all *all);
-void	ms_echo(char **content);
-void	ms_export(char **content, t_all *all);
-void	ms_unset(char **content, t_all *all);
-void	ms_exit(char **content);
-int		is_builtin(t_command *str);
+void		exec_builtin(t_command *str, t_all *all);
+void		ms_cd(char **content, t_all *all);
+void		ms_echo(char **content);
+void		ms_export(char **content, t_all *all);
+void		ms_unset(char **content, t_all *all);
+void		ms_exit(char **content);
+int 		is_builtin(t_command *str);
 
 /* parse */
 void	parse_main(char *s, t_all *all);
@@ -75,7 +75,6 @@ char	*env_get(char *str, int *i, t_all *all);
 
 /* token_quote */
 char	*double_quote(char *str, int *i, t_all *all);
-
 /* exec */
 void	start_ms(t_all *all);
 void	exec_single_cmd(t_command *command, t_all *all, char **envp);
@@ -92,3 +91,4 @@ void	error_exit(char *str, int exit_code);
 void	error_handler(char *arg, int _errno);
 
 #endif
+

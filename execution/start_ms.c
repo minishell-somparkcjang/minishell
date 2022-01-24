@@ -1,22 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start_ms.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 13:55:17 by sompark           #+#    #+#             */
+/*   Updated: 2022/01/24 14:01:03 by sompark          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
-/*
-WIFEXITED
-자식 프로세스가 정상적으로 종료되었다면 TRUE
-WIFSIGNALED
-자식 프로세스가 시그널에 의해 종료되었다면 TRUE
-WIFSTOPED
-자식 프로세스가 중단되었다면 TRUE
-WEXITSTATUS
-자식 프로세스가 정상 종료되었을 때 반환한 값
-WTERMSIG
-자식 프로세스를 종료하도록한 신호의 번호 반환 (WIFSGNALED가 non
-WSTOPSIG
-자식을 정지하도록 야기한 신호의 숫자를 반환
-*/
-
-static int	exec_child(t_parse *parse, t_parse *parse_prev, t_all *all, pid_t pid, char **envp)
+static int	exec_child(t_parse *parse, t_all *all, pid_t pid, char **envp)
 {
+	t_parse	*parse_prev;
+
+	parse_prev = ret_parse_prev(all, parse);
 	pipe_fd_connect(parse_prev, parse);
 	if (red_apply(parse->left) == 1)
 		return (pid);
@@ -31,7 +31,7 @@ static int	exec_child(t_parse *parse, t_parse *parse_prev, t_all *all, pid_t pid
 	return (0);
 }
 
-static pid_t	make_child(t_all *all, t_parse *parse, int heredoc_count, char **envp)
+static pid_t	make_child(t_all *all, t_parse *parse, char **envp)
 {
 	pid_t	pid;
 	int		ret;
@@ -45,15 +45,15 @@ static pid_t	make_child(t_all *all, t_parse *parse, int heredoc_count, char **en
 		printf("Failed forking child..\n");
 	else if (pid == 0)
 	{
-		ret = exec_child(parse, parse_prev, all, pid, envp);
-		if(ret != 0)
+		ret = exec_child(parse, all, pid, envp);
+		if (ret != 0)
 			return (ret);
 	}
 	pipe_fd_close(parse_prev, parse);
 	return (pid);
 }
 
-static void	multi_cmd(t_all *all, int heredoc_count)
+static void	multi_cmd(t_all *all)
 {
 	pid_t	pid[2048];
 	t_parse	*tmp_parse;
@@ -66,7 +66,7 @@ static void	multi_cmd(t_all *all, int heredoc_count)
 	tmp_parse = all->parser;
 	while (tmp_parse)
 	{
-		pid[i++] = make_child(all, tmp_parse, heredoc_count, envp);
+		pid[i++] = make_child(all, tmp_parse, envp);
 		tmp_parse = tmp_parse->next;
 	}
 	i = 0;
@@ -78,11 +78,11 @@ static void	multi_cmd(t_all *all, int heredoc_count)
 	free_env(envp);
 }
 
-static void	single_cmd(t_all *all, int heredoc_count)
+static void	single_cmd(t_all *all)
 {
-	int 	stdin;
-	int 	stdout;
-	int 	stderr;
+	int		stdin;
+	int		stdout;
+	int		stderr;
 	char	**envp;
 
 	std_save(&stdin, &stdout, &stderr);
@@ -102,16 +102,16 @@ static void	single_cmd(t_all *all, int heredoc_count)
 
 void	start_ms(t_all *all)
 {
-	int heredoc_count;
+	int	heredoc_count;
 
-	if (all->parser == NULL)
-		return ;
 	heredoc_count = heredoc_apply(all->parser);
 	if (heredoc_count < 0)
 		return ;
+	if (all->parser == NULL)
+		return ;
 	if (all->pip_cnt == 1)
-		single_cmd(all, heredoc_count);
+		single_cmd(all);
 	else
-		multi_cmd(all, heredoc_count);
+		multi_cmd(all);
 	heredoc_tmp_file_delete(heredoc_count);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/24 17:30:05 by cjang             #+#    #+#             */
-/*   Updated: 2020/12/25 17:57:34 by cjang            ###   ########.fr       */
+/*   Created: 2021/02/02 17:06:02 by sompark           #+#    #+#             */
+/*   Updated: 2021/02/02 17:58:30 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t	str_len;
+	size_t	i;
+	size_t	src_l;
+	size_t	dst_l;
+	size_t	ret;
 
-	str_len = 0;
-	while (src[str_len] != '\0')
-		str_len++;
-	while (*dst != '\0' && dstsize > 0)
+	i = 0;
+	src_l = ft_strlen(src);
+	dst_l = ft_strlen(dst);
+	if (dst_l >= dstsize)
+		return (dstsize + src_l);
+	ret = src_l + dst_l;
+	while (src[i] && dst_l + 1 < dstsize)
 	{
-		str_len++;
-		dstsize--;
-		dst++;
+		dst[dst_l++] = src[i++];
 	}
-	while (*src != '\0' && dstsize > 1)
-	{
-		*dst++ = *src++;
-		dstsize--;
-	}
-	if (dstsize > 0)
-		*dst = '\0';
-	return (str_len);
+	dst[dst_l] = '\0';
+	return (ret);
 }

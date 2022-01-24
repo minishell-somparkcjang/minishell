@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/22 10:57:21 by cjang             #+#    #+#             */
-/*   Updated: 2020/12/23 04:29:03 by cjang            ###   ########.fr       */
+/*   Created: 2021/01/29 13:43:16 by sompark           #+#    #+#             */
+/*   Updated: 2021/03/03 00:08:54 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	while (n-- > 0)
-		*(unsigned char *)s++ = 0;
+	ft_memset(s, 0, n);
 }

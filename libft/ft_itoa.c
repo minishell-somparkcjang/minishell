@@ -3,79 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 15:16:57 by cjang             #+#    #+#             */
-/*   Updated: 2021/07/16 15:56:33 by cjang            ###   ########.fr       */
+/*   Created: 2021/02/26 13:27:45 by sompark           #+#    #+#             */
+/*   Updated: 2022/01/24 12:07:52 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	check_len(int n)
+static	int	ft_getdigit(int n)
 {
-	int		len;
-	int		n_tmp;
+	int	len;
 
 	len = 0;
-	n_tmp = n;
-	while (n_tmp)
-	{
-		n_tmp /= 10;
-		len++;
-	}
 	if (n == 0)
 		return (1);
-	else if (n > 0)
-		return (len);
-	else
-		return (len + 1);
-}
-
-static int	check_digit(int n)
-{
-	int		digit;
-
-	digit = 1;
-	while (n / 10 >= digit)
-		digit *= 10;
-	return (digit);
-}
-
-static int	check_minus(int n, int *i, char *alp)
-{
-	alp[*i] = '-';
-	*i += 1;
-	if (n == -2147483648)
+	if (n < 0)
 	{
-		alp[*i] = '2';
-		*i += 1;
-		return (147483648);
+		n = n * -1;
+		len = 1;
 	}
-	return (n * -1);
+	while (n > 0)
+	{
+		n = n / 10;
+		len++;
+	}
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	int		digit;
-	int		i;
-	int		len;
-	char	*alp;
+	int		num;
+	char	*ret;
 
-	i = 0;
-	len = check_len(n);
-	alp = (char *)malloc(len + 1);
-	if (!alp)
-		return (NULL);
-	if (n < 0)
-		n = check_minus(n, &i, alp);
-	digit = check_digit(n);
-	while (i < len)
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	num = ft_getdigit(n);
+	ret = (char *)malloc(sizeof(char) * (num + 1));
+	ret[num--] = '\0';
+	if (n == 0)
 	{
-		alp[i++] = n / digit + '0';
-		n %= digit;
-		digit /= 10;
+		ret[0] = '0';
+		return (ret);
 	}
-	alp[i] = '\0';
-	return (alp);
+	if (n < 0)
+	{
+		ret[0] = '-';
+		n = -n;
+	}
+	while (n > 0)
+	{
+		ret[num--] = (n % 10) + '0';
+		n = n / 10;
+	}
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 01:08:23 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/24 00:42:14 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/24 14:46:48 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ char	*double_quote(char *str, int *i, t_all *all)
 	str_return = dq_check_init(str, i, index);
 	if (str_return == NULL)
 		return (NULL);
-	else if (ft_strlen(str_return) == 0)
+	else if (str[0] == '"' && str[1] == '"')
 		return (str_return);
 	while (str[index[0]] != '"' && str[index[0]] != '\0')
 	{

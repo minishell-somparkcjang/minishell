@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 18:03:29 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/24 00:44:00 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/24 15:33:00 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	parse_main(char *s, t_all *all)
 	token_head = tokenization(all, s);
 	if (token_head == NULL)
 		return ;
-	print_token(token_head);
+	// print_token(token_head);
 	parse_head = parse_assemble(token_head, all);
 	if (parse_head == NULL)
 	{
@@ -105,6 +105,6 @@ void	parse_main(char *s, t_all *all)
 		return ;
 	}
 	token_free(token_head);
-	print_parse(parse_head);
+	// print_parse(parse_head);
 	all->parser = parse_head;
 }

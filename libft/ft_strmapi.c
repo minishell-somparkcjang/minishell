@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42seoul.k>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 17:54:25 by cjang             #+#    #+#             */
-/*   Updated: 2021/07/16 15:54:28 by cjang            ###   ########.fr       */
+/*   Created: 2021/02/26 14:08:24 by sompark           #+#    #+#             */
+/*   Updated: 2021/03/04 20:40:10 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*newstr;
-	unsigned int	index;
-	unsigned int	len;
+	char	*ret;
+	size_t	i;
+	size_t	len;
 
+	i = 0;
 	if (!s)
 		return (NULL);
-	index = 0;
 	len = ft_strlen(s);
-	newstr = (char *)malloc(len + 1);
-	if (!newstr)
+	ret = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ret)
 		return (NULL);
-	while (index < len)
+	while (i < len)
 	{
-		newstr[index] = f(index, s[index]);
-		index++;
+		ret[i] = f(i, s[i]);
+		i++;
 	}
-	newstr[index] = '\0';
-	return (newstr);
+	ret[i] = '\0';
+	return (ret);
 }

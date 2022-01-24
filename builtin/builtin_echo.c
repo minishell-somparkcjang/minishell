@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_echo.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 12:11:09 by sompark           #+#    #+#             */
+/*   Updated: 2022/01/24 12:12:25 by sompark          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 static int	is_option(char *content)
@@ -21,8 +33,8 @@ static int	is_option(char *content)
 
 void	ms_echo(char **content)
 {
-	int			i;
-	int		nlflag;
+	int	i;
+	int	nlflag;
 
 	if (content[1] == NULL)
 	{
