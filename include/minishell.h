@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 22:33:19 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/24 22:34:21 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/25 13:42:51 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,7 @@ int		error_print3(char *str1, char *str2, char *str3, int exit_code);
 void	error_exit(char *str, int exit_code);
 void	error_handler(char *arg, int _errno);
 
+/* error_handler2 */
+int		error_print_endl(char *str, int exit_code);
+void	*error_print_null(char *str, int exit_code);
 #endif

@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:10:17 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/19 18:05:59 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/24 23:45:44 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,15 @@ static int	heredoc_tmp_file_create(t_redirection *red, int index)
 		return (1);
 	str = ft_itoa(index);
 	if (str == NULL)
-		return (error_print(strerror(errno), 1));
+		return (error_print_endl(strerror(errno), 1));
 	filename = ft_strjoin("tmp__heredoc__", str);
 	free(str);
 	if (filename == NULL)
-		return (error_print(strerror(errno), 1));
+		return (error_print_endl(strerror(errno), 1));
 	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, \
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd < 0)
-		return (error_print(strerror(errno), 1));
+		return (error_print_endl(strerror(errno), 1));
 	heredoc_command(red, fd);
 	free(red->file_name);
 	red->file_name = filename;

@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 17:01:48 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/24 16:00:47 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/24 23:46:11 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	com_con_malloc_init(t_command *comm, t_token *token, int com_len)
 	i = 0;
 	comm->content = (char **)malloc((com_len + 1) * sizeof(char *));
 	if (!comm->content)
-		return (error_print(strerror(errno), 1));
+		return (error_print_endl(strerror(errno), 1));
 	while (token != NULL && token->type != pip)
 	{
 		if (token->type == com)
@@ -91,7 +91,7 @@ static int	red_fdout_file_check(t_redirection *red, t_token *token)
 		token = token->next;
 	}
 	else
-		return (error_print(\
+		return (error_print_endl(\
 		"minishell: syntax error near unexpected token `newline'", 1));
 	return (0);
 }

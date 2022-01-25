@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 18:03:10 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/24 16:13:24 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/24 23:46:15 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	token_str_change(t_token *token, char *s, int *index)
 		if (s == NULL)
 		{
 			free(token->str);
-			return (error_print(strerror(errno), 1));
+			return (error_print_endl(strerror(errno), 1));
 		}
 		else if (ft_strlen(s) == 0 && token->type == r_file && index[2] == 0)
 		{

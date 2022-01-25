@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 22:33:28 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/24 22:40:09 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/25 13:42:47 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char		*single_quote(char *str, int *i);
 /* utils */
 char		*ft_strdup_error_check(char *str);
 int			quotes_flag_check(char c, int quotes_flag);
-void		*error_print_null(char *str, int exit_code);
 
 /* parse_func */
 int			token_com_len(t_token *token);

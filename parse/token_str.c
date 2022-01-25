@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 00:57:37 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/19 23:34:02 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/24 23:45:31 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static int	redirection_check(char *s, int *i, int *r_flag, int i_tmp)
 		return (1);
 	}
 	else if (*i != i_tmp && i_check == -1)
-		return (error_print("file descriptor out of range: \
-		Bad file descriptor", 1));
+		return (error_print_endl(\
+		"file descriptor out of range: Bad file descriptor", 1));
 	else
 	{
 		if (s[*i] == s[*i + 1])
