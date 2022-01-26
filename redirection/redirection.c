@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:30:39 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/24 23:45:57 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/25 17:14:56 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ int	red_apply(t_redirection *red_head)
 	{
 		fd = red_open(red);
 		if (fd < 0)
-		{
-			error_print("minishell: ", 1);
-			return (error_print3(red->file_name, ": ", strerror(errno), 1));
-		}
+			return (error_print_endl(strerror(errno), 1));
 		if (red->type == r_in || red->type == r_here || \
 		red->type == r_out || red->type == r_outapp)
 			i_check = dup2(fd, red->fd_left);

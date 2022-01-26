@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/19 15:10:17 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/24 23:45:44 by cjang            ###   ########.fr       */
+/*   Created: 2022/01/25 17:48:41 by cjang             #+#    #+#             */
+/*   Updated: 2022/01/25 17:48:45 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	heredoc_command(t_redirection *red, int fd)
 {
 	char	*str;
 
+	signal(SIGINT, &heredoc_sigint);
 	while (1)
 	{
 		str = readline("> ");
@@ -54,6 +55,7 @@ static void	heredoc_command(t_redirection *red, int fd)
 		ft_strlen_long(str, red->file_name)) == 0)
 		{
 			free(str);
+			signal(SIGINT, &handle_signal);
 			return ;
 		}
 		ft_putendl_fd(str, fd);
@@ -100,9 +102,6 @@ static int	heredoc_func(t_redirection *red, int *i, int *here_flag)
 	return (0);
 }
 
-/*
-** -1	비정상 종료
-*/
 int	heredoc_apply(t_parse *parse_head)
 {
 	t_parse			*parse;

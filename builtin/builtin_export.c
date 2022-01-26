@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:11:15 by sompark           #+#    #+#             */
-/*   Updated: 2022/01/24 12:12:25 by sompark          ###   ########.fr       */
+/*   Updated: 2022/01/25 16:54:11 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	print_export(t_all *all)
 		printf("%s", tmp->key);
 		if (tmp->value)
 		{
-			printf("=\"%s\"\n", tmp->value);
+			printf("=\"%s\"", tmp->value);
 		}
 		printf("\n");
 		tmp = tmp->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:12:31 by sompark           #+#    #+#             */
-/*   Updated: 2022/01/24 12:12:32 by sompark          ###   ########.fr       */
+/*   Updated: 2022/01/26 14:41:45 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	valid_str(char *str)
 {
 	if (!str)
 	{
-		ft_putendl_fd("exit\n", 2);
+		ft_putendl_fd("exit", 2);
 		exit(g_exit_code);
 	}
 	if (ft_isspace(str) || str[0] == '\0')
@@ -35,6 +35,7 @@ int	main(int argc, char **argv, char **envp)
 	signal_handle();
 	while (1)
 	{
+		signal_handle();
 		str = readline("minishell-0.0$ ");
 		if (valid_str(str))
 		{
@@ -42,10 +43,10 @@ int	main(int argc, char **argv, char **envp)
 			parse_main(str, &all);
 			start_ms(&all);
 			parse_free(all.parser);
-			free(str);
 		}
 		else
 			g_exit_code = 258;
+		free(str);
 	}
 	return (0);
 }

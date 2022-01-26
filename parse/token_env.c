@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 14:34:45 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/20 15:52:24 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/25 15:05:20 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ char	*env_get(char *str, int *i, t_all *all)
 	{
 		*i += ++index;
 		str_return = ft_itoa(g_exit_code);
-		return (ft_strdup_error_check(str_return));
+		if (str_return == NULL)
+			return (error_print_null(strerror(errno), 1));
+		return (str_return);
 	}
 	else if (str[index] >= '0' && str[index] <= '9')
 		return (env_number(all, str, i, index));

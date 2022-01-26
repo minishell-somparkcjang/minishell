@@ -1,29 +1,17 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/24 22:33:19 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/25 13:42:51 by cjang            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include "../libft/libft.h"
 # include "parse.h"
 # include "redirection.h"
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <sys/errno.h>
 # include <sys/stat.h>
 # include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_env
 {
@@ -56,6 +44,7 @@ void	delete_env_key(t_all *all, char *key);
 void	set_env_value(t_all *all, char *key, char *newvalue);
 char	**ret_env(t_all *all);
 void	free_env(char **envp);
+void	set_shlvl(t_all *all);
 
 /* utils */
 size_t	ft_strlen_long(const char *s1, const char *s2);
@@ -87,7 +76,6 @@ char	*env_get(char *str, int *i, t_all *all);
 
 /* token_quote */
 char	*double_quote(char *str, int *i, t_all *all);
-
 /* exec */
 void	start_ms(t_all *all);
 void	exec_single_cmd(t_command *command, t_all *all, char **envp);
@@ -95,7 +83,9 @@ void	exec_cmd(t_command *command, t_all *all, char **envp);
 void	set_exit(int status);
 
 /* signal */
-void	signal_handle(void);	
+void	signal_handle(void);
+void	heredoc_sigint(int signo);
+void	handle_signal(int signo);
 
 /* error */
 int		error_print(char *str, int exit_code);

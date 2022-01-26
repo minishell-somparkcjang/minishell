@@ -101,14 +101,14 @@ int	ft_isspace(char *str)
 
 	i = -1;
 	nb = 0;
-	while (++i < ft_strlen(str))
+	while (++i < (int)ft_strlen(str))
 	{
 		if (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
 			|| str[i] == '\f' || str[i] == '\r'
 			|| str[i] == ' ')
 			nb++;
 	}
-	if (nb == ft_strlen(str))
+	if (nb == (int)ft_strlen(str))
 		return (1);
 	return (0);
 }

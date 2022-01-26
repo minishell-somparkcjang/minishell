@@ -43,6 +43,8 @@ static char	*get_path(t_command *command, t_all *all)
 	char	**paths;
 	char	*path;
 
+	if (ft_strchr(command->command, '/'))
+		return (command->command);
 	path = find_env_key(all, "PATH");
 	if (!path)
 		return (NULL);

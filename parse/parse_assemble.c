@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 16:54:40 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/24 23:46:07 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/25 16:21:43 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	pip_check(t_parse **parse, t_token **token)
 	if (*token != NULL && (*token)->type == pip && \
 	((*token)->next == NULL || (*token)->next->type == pip))
 		return (error_print_endl(\
-		"minishell: syntax error near unexpected token`|'", 1));
+		"minishell: syntax error near unexpected token`|'", 258));
 	if (*token != NULL)
 	{
 		parse_tmp = parse_malloc_init(NULL, NULL, NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:11:02 by sompark           #+#    #+#             */
-/*   Updated: 2022/01/24 12:12:25 by sompark          ###   ########.fr       */
+/*   Updated: 2022/01/25 17:04:54 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,16 @@ static char	*set_home_dir(t_all *all, char *path)
 {
 	int		len;
 	char	*home;
+	char	*tmp;
 
 	len = ft_strlen(path);
 	if (len == 1)
-		return (ft_strdup(find_env_key(all, "HOME")));
+	{
+		tmp = find_env_key(all, "HOME");
+		if (!tmp)
+			return (NULL);
+		return (ft_strdup(tmp));
+	}
 	else
 	{
 		home = find_env_key(all, "HOME");
@@ -45,10 +51,20 @@ static void	change_dir(char *newpath, char *oldpath, t_all *all)
 	}
 	else
 	{
-		set_env_value(all, ft_strdup("OLDPATH"), ft_strdup(oldpath));
+		set_env_value(all, ft_strdup("OLDPWD"), ft_strdup(oldpath));
 		set_env_value(all, ft_strdup("PWD"), ft_strdup(newpath));
 		g_exit_code = 0;
 	}
+}
+
+static char	*single_cd(t_all *all)
+{
+	char	*tmp;
+
+	tmp = find_env_key(all, "HOME");
+	if (!tmp)
+		return (NULL);
+	return (ft_strdup(tmp));
 }
 
 void	ms_cd(char **content, t_all *all)
@@ -57,7 +73,7 @@ void	ms_cd(char **content, t_all *all)
 	char	*newpath;
 
 	if (content[1] == NULL)
-		newpath = ft_strdup(find_env_key(all, "HOME"));
+		newpath = single_cd(all);
 	else
 		newpath = find_newpath(content[1], all);
 	oldpath = getcwd(NULL, 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:11:39 by sompark           #+#    #+#             */
-/*   Updated: 2022/01/24 12:12:25 by sompark          ###   ########.fr       */
+/*   Updated: 2022/01/25 16:29:53 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,5 @@ void	init_env(t_all *all, char **env)
 	}
 	all->pip_cnt = 0;
 	all->parser = NULL;
+	set_shlvl(all);
 }

@@ -1,7 +1,7 @@
 CC = gcc
-CFLAGS = -Wall -Wextra # -Werror
-READLINE = -lreadline
-
+CFLAGS = -Wall -Wextra -Werror
+READLINE = -lreadline -L ${HOME}/.brew/opt/readline/lib -I ${HOME}/.brew/opt/readline/include
+READLINE_INCLUDE = -I ${HOME}/.brew/opt/readline/include
 LIBFT = libft
 LIBFT_A = libft/libft.a
 
@@ -38,6 +38,7 @@ SRCS_FILE = main.c\
 			execution/start_ms.c\
 			execution/exec_cmd.c\
 			error_handler/error_handler.c\
+			error_handler/error_handler2.c\
 			utils.c\
 			signal.c\
 
@@ -49,21 +50,21 @@ NAME_MINISHELL = minishell
 all: $(LIBFT) $(NAME_MINISHELL)
 
 $(LIBFT):
-	@make -C $(LIBFT)
+	make -C $(LIBFT)
 
-$(NAME_MINISHELL): $(LIBFT_A) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME_MINISHELL) $(READLINE)
+$(NAME_MINISHELL): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME_MINISHELL) $(READLINE)
 
 %.o: %.c
-	@$(CC) -c $(CFLAGS) -o $@ $<
+	$(CC) -c  $(CFLAGS) $(READLINE_INCLUDE) -o  $@ $<
 
 clean:
-	@make clean -C $(LIBFT)
-	@rm -f $(OBJS)
+	make clean -C $(LIBFT)
+	rm -f $(OBJS)
 
 fclean: clean
-	@make fclean -C $(LIBFT)
-	@rm -f $(NAME_MINISHELL)
+	make fclean -C $(LIBFT)
+	rm -f $(NAME_MINISHELL)
 
 re: fclean all
 

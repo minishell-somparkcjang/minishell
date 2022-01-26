@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 17:01:47 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/25 13:41:31 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/25 17:15:06 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strdup_error_check(char *str)
 
 	s_return = ft_strdup(str);
 	if (s_return == NULL)
-		error_print(strerror(errno), 1);
+		error_print_endl(strerror(errno), 1);
 	return (s_return);
 }
 

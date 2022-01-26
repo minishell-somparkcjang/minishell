@@ -6,7 +6,7 @@
 /*   By: cjang <cjang@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 17:01:48 by cjang             #+#    #+#             */
-/*   Updated: 2022/01/24 23:46:11 by cjang            ###   ########.fr       */
+/*   Updated: 2022/01/25 16:21:46 by cjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	red_fdout_file_check(t_redirection *red, t_token *token)
 	}
 	else
 		return (error_print_endl(\
-		"minishell: syntax error near unexpected token `newline'", 1));
+		"minishell: syntax error near unexpected token `newline'", 258));
 	return (0);
 }
 

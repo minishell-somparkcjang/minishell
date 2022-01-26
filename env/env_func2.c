@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_func2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sompark <sompark@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: sompark <sompark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 12:11:36 by sompark           #+#    #+#             */
-/*   Updated: 2022/01/24 12:12:25 by sompark          ###   ########.fr       */
+/*   Updated: 2022/01/25 17:04:21 by sompark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,14 @@ void	free_env(char **envp)
 	while (envp[i])
 		free(envp[i++]);
 	free(envp);
+}
+
+void	set_shlvl(t_all *all)
+{
+	char	*tmp;
+	int		i;
+
+	tmp = find_env_key(all, "SHLVL");
+	i = (ft_atoi(tmp) + 1);
+	set_env_value(all, strdup("SHLVL"), ft_itoa(i));
 }

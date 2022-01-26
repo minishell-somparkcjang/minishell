@@ -43,7 +43,6 @@ void	set_env_value(t_all *all, char *key, char *newvalue)
 		if (tmp->next == NULL)
 		{	
 			tmp->next = make_newenv(key, newvalue);
-			printf("key:%s value: %s\n", tmp->next->key, tmp->next->value);
 			all->env->num_env++;
 			return ;
 		}
