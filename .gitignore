@@ -1,0 +1,7 @@
+.vscode
+flowchart
+.DS_Store
+README.md
+*.o
+minishell
+*.a
